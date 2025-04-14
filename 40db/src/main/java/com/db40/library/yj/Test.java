@@ -1,4 +1,4 @@
-package com.library.demo.yj;
+package com.db40.library.yj;
 
 import lombok.Getter;
 import lombok.Setter;
