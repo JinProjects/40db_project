@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko"   xmlns:th="http://www.thymeleaf.org" 
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{fragments/layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>희망도서 신청</h2>
+<h3>자료검색</h3>
+	<form class="d-flex">
+		<div class="form-check">
+			<input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" checked>
+			<label class="form-check-label">제목</label>
+		</div>
+		<div class="form-check">
+			<input class="form-check-input" type="checkbox" id="check2" name="option2" value="something" checked>
+			<label class="form-check-label">저자</label>
+		</div>
+		<div class="form-check">
+			<input class="form-check-input" type="checkbox" id="check3" name="option3" value="something" checked>
+			<label class="form-check-label">출판사</label>
+		</div>
+		<input class="form-control me-2" type="text" placeholder="검색">
+		<button class="btn btn-primary" type="button">검색</button>
+	</form>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>제목</th>
+				<th>저자</th>
+				<th>출판사</th>
+				<th>출판일</th>
+				<th>ISBN</th>
+				<th>추천사유(선택)</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>다군만두고싶다</td>
+				<td>그럴만두</td>
+				<td>나만두고가지마</td>
+				<td>만만한 두개골123456789</td>
+				<td>낭만두고양이</td>
+			</tr>
+		</tbody>
+	</table>
+	<button type="button" class="btn btn-outline-primary">취소</button>
+	<button type="button" class="btn btn-primary">제출하기</button>
+
+</body>
+</html>
