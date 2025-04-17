@@ -31,14 +31,9 @@ public class Books {
 	    @Column(name = "book_intro", length = 300)
 	    private String bookIntro;
 	    
-<<<<<<< HEAD
-	    @Column(name = "book_category", length = 100)
-	    private String bookCategory;
-=======
 	    @ManyToOne
 	    @JoinColumn(name = "book_category_id")
 	    private Category category;
->>>>>>> c6367ffd11dd24fe6b63cf9a40ba2798db0212c2
 
 	    @Column(name = "book_title", nullable = false, length = 200)
 	    private String bookTitle;
