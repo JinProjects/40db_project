@@ -7,13 +7,17 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div layout:fragment="content">
+<div  class="container">
 <h2>희망도서 신청</h2>
 <h3>신청내역</h3>
-<form class="d-flex">
-    <input class="form-control me-2" type="text" placeholder="검색">
-    <button class="btn btn-primary" type="button">검색</button>
-</form>
-  <table class="table">
+<form>
+	<div  class="d-flex p-3">
+    <input class="form-control me-2 w-75" type="text" placeholder="검색">
+    <button class="btn btn-primary " type="button">검색</button>
+	</div>
+  <table class="table table-bordered table-hover text-center">
+  <caption>40db wish list</caption>
     <thead>
       <tr>
         <th>번호</th>
@@ -33,23 +37,17 @@
         <td>2025-04-16</td>
         <td>신청중</td>
       </tr>
-      <tr>
-        <td>2</td>
-        <td>로렘입숨</td>
-        <td>로렘</td>
-        <td>입숨출판사</td>
-        <td>2025-04-16</td>
-        <td>반려됨</td>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>로렘입숨</td>
-        <td>로렘</td>
-        <td>입숨출판사</td>
-        <td>2025-04-16</td>
-        <td>신청완료</td>
-      </tr>
+	  <tr th:each=" dto,state : ${hope_now} " >
+		<td th:text="${list.size()-state.index}" >1</td>
+		<td><a th:text="${dto.book_title}" ></a></td>
+		<td th:text="${dto.BookHope.book_auther}" >ADMIN</td>
+		<td th:text="${ #temporals.format(dto.createDate, 'yyyy-MM-dd HH:mm')  }" ></td>
+		<td th:text="${dto.book_hope_stat}" ></td>
+	  </tr>
     </tbody>
   </table>
+</form>
+</div>
+</div>
 </body>
 </html>

@@ -7,47 +7,59 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>희망도서 신청</h2>
-<h3>자료검색</h3>
-	<form class="d-flex">
-		<div class="form-check">
+<div layout:fragment="content">
+	<div class="container pt-5">
+		<h2 class="text-center">희망도서 신청</h2>
+		<h4>자료검색</h4>
+		<form class="m-3 d-flex justify-content-center">
+		<div class="d-inline-flex p-3 form-check">
 			<input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" checked>
 			<label class="form-check-label">제목</label>
 		</div>
-		<div class="form-check">
+		<div class="d-inline-flex p-3 form-check">
 			<input class="form-check-input" type="checkbox" id="check2" name="option2" value="something" checked>
 			<label class="form-check-label">저자</label>
 		</div>
-		<div class="form-check">
+		<div class="d-inline-flex p-3 form-check">
 			<input class="form-check-input" type="checkbox" id="check3" name="option3" value="something" checked>
 			<label class="form-check-label">출판사</label>
 		</div>
-		<input class="form-control me-2" type="text" placeholder="검색">
+		<div class="d-inline-flex p-3 ">
+		<input class="form-control me-2 p-3 " type="text" placeholder="검색">
 		<button class="btn btn-primary" type="button">검색</button>
-	</form>
-	<table class="table">
-		<thead>
-			<tr>
-				<th>제목</th>
-				<th>저자</th>
-				<th>출판사</th>
-				<th>출판일</th>
-				<th>ISBN</th>
-				<th>추천사유(선택)</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>다군만두고싶다</td>
-				<td>그럴만두</td>
-				<td>나만두고가지마</td>
-				<td>만만한 두개골123456789</td>
-				<td>낭만두고양이</td>
-			</tr>
-		</tbody>
-	</table>
-	<button type="button" class="btn btn-outline-primary">취소</button>
-	<button type="button" class="btn btn-primary">제출하기</button>
+		</div>
+		</form>
 
+	<div class="container card  my-5   p-3">
+		<div class="my-3">
+			<label for="title" class="form-label">제목</label> <input
+				type="text" name="title" id="title" class="form-control">
+		</div>
+		<div class="my-3">
+			<label for="writer" class="form-label">저자</label> <input
+				type="text" name="writer" id="writer" class="form-control">
+		</div>
+		<div class="my-3">
+			<label for="publisher" class="form-label">출판사</label> <input
+				type="text" name="publisher" id="publisher" class="form-control">
+		</div>
+		<div class="my-3">
+			<label for="pub-day" class="form-label">출판일</label> <input
+				type="text" name="pub-day" id="pub-day" class="form-control">
+		</div>
+		<div class="my-3">
+			<label for="isbn" class="form-label">ISBN</label> <input
+				type="text" name="isbn" id="isbn" class="form-control">
+		</div>
+		<div class="my-3">
+			<label for="tellmewhy" class="form-label">추천사유(선택)</label>
+			<textarea name="tellmewhy" id="tellmewhy" cols="60" rows="10"
+				class="form-control"></textarea>
+		</div>
+	</div>
+	<button type="reset" class="btn btn-outline-primary">취소</button>
+	<button type="submit" class="btn btn-primary">제출하기</button>
+	</div>
+</div>
 </body>
 </html>

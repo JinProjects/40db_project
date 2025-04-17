@@ -29,6 +29,8 @@ public class BookHope {
 	@Column(columnDefinition = "text")
 	private String book_reason;
 	
+	private String book_hope_stat;
+	
 	@Column(updatable = false)
 	private LocalDateTime createDate = LocalDateTime.now();
 	
