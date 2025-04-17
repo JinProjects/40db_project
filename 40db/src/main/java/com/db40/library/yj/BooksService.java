@@ -16,4 +16,7 @@ public class BooksService {
 		//		);
 		booksRepository.save(books);
 	}
+	//public Category findCategory(String name) {
+		//booksRepository.find
+	//}
 }
