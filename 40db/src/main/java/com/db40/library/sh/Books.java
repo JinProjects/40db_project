@@ -24,7 +24,7 @@ public class Books {
 
 	    @Column(name = "book_intro", length = 300)
 	    private String bookIntro;
-
+	    
 	    @Column(name = "book_category", length = 100)
 	    private String bookCategory;
 
