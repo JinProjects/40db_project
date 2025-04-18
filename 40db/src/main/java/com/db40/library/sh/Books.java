@@ -19,6 +19,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Books {
+
 	    @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    @Column(name = "book_no")
@@ -36,6 +37,7 @@ public class Books {
 
 	    @Column(name = "book_title", nullable = false, length = 200)
 	    private String bookTitle;
+
 	    @Column(name = "book_cover", nullable = false, length = 100)
 	    private String bookCover;
 	    
