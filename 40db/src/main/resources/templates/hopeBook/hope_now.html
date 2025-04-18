@@ -37,12 +37,15 @@
         <td>2025-04-16</td>
         <td>신청중</td>
       </tr>
-	  <tr th:each=" dto,state : ${hope_now} " >
+	  <tr th:each=" BookHope : ${hope_now} " >
 		<td th:text="${list.size()-state.index}" >1</td>
-		<td><a th:text="${dto.book_title}" ></a></td>
-		<td th:text="${dto.BookHope.book_auther}" >ADMIN</td>
-		<td th:text="${ #temporals.format(dto.createDate, 'yyyy-MM-dd HH:mm')  }" ></td>
-		<td th:text="${dto.book_hope_stat}" ></td>
+		<td th:text="${dto.book_title}"> 책의 제목</td>
+		<td th:text="${dto.book_isbn}" >ISBN</td>
+		<td th:text="${dto.BookHope.book_auther}" >작가</td>
+		<td th:text="${dto.BookHope.book_publisher}" >출판사</td>
+		<td th:text="${dto.BookHope.book_published_date}" >출판일</td>
+		<td th:text="${ #temporals.format(dto.createDate, 'yyyy-MM-dd HH:mm')  }" >신청날짜</td>
+		<td th:text="${dto.book_hope_stat}" >신청상황</td>
 	  </tr>
     </tbody>
   </table>

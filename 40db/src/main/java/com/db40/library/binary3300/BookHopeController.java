@@ -1,5 +1,6 @@
 package com.db40.library.binary3300;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BookHopeController {
 	private final BookHopeService bookHopeService;
-	
+	@Autowired BookHopeApi bookHopeApi;
 	
 	// 희망도서 전체리스트 메인
 	@GetMapping("/hopeBook/hope_now")
@@ -37,6 +38,8 @@ public class BookHopeController {
 	public String detail(Model model) {
 		 return "/hopeBook/hope_detail"; 
 	}
+	
+	
 	 
 
 	// 희망도서 등록하기 데이터베이스에 도서추가기능...

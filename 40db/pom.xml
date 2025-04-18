@@ -95,6 +95,7 @@
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
 			<artifactId>thymeleaf-layout-dialect</artifactId>
 			</dependency>
+
 	      <!-- 추가  -->
 	      <!-- 추가  -->   
 	</dependencies>

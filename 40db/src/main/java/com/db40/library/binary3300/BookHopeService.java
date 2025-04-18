@@ -7,6 +7,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.db40.library.member.Member;
+
+
 
 @Service
 public class BookHopeService {
@@ -23,6 +26,14 @@ public class BookHopeService {
 		BookHope bookhope = bookHopeRepository.findById(id).get();
 		bookHopeRepository.save(bookhope);
 		return bookhope;
+	}
+	
+	//임시 작성하기 
+	public void insert(BookHope bookhope, String member_id) {
+		Member member = new Member();
+		member.setMemberId(member_id);
+		bookhope.setMember(member);
+		bookHopeRepository.save(bookhope);
 	}
 	
 	//관리자가 반려하기-등록하기 폼

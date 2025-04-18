@@ -1,12 +1,19 @@
 package com.db40.library.binary3300;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.db40.library.member.Member;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -33,5 +40,13 @@ public class BookHope {
 	
 	@Column(updatable = false)
 	private LocalDateTime createDate = LocalDateTime.now();
+	
+	//@OneToMany(mappedBy = "bookHope")
+	//private Member member;
+	
+	@ManyToOne
+	@JoinColumn(name = "member_id") // 외래 키 설정
+	private Member member; // 단일 Member 객체
+
 	
 }

@@ -17,5 +17,7 @@ public interface BookHopeRepository extends JpaRepository<BookHope,Long>{
 	@Query("update BookHope b set b.book_hope_stat = :book_hope_stat    where b.book_hope_no = :book_hope_no")
 	int updateByNo( String book_hope_stat, Long book_hope_no );
 	
+	//insert into BookHope b 
+	
 }
  
