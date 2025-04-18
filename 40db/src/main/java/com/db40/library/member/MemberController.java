@@ -17,19 +17,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MemberController {
 	
 	@Autowired   MemberService service;
-	
-	@GetMapping("/")
-	public String main() {  return "member/login"; }
 
-	@GetMapping("/member/member")
-	public String member() {  return "member/member"; }
-	
+	/* 기본 로그인 페이지 */
 	@GetMapping("/member/login")
 	public String login() {  return "member/login"; }
 	
+	/* 기본 회원가입 페이지 */
 	@GetMapping("/member/join")
 	public String join(MemberForm memberForm) {  return "member/join"; }
 	
+	/* 기본 회원가입 기능 */
 	@PostMapping("/member/join")
 	public String join(@Valid MemberForm memberForm , BindingResult bindingResult) {  
 		
@@ -64,12 +61,13 @@ public class MemberController {
 			bindingResult.reject("failed" , e.getMessage());
 			return "member/join"; 
 		}
-		
 		return "member/login"; 
 	}
+	
 
 	/* 아이디 찾기 */
 	/* 아이디 찾기 */
+	/* 아이디 찾기 페이지 */
 	@GetMapping("/member/findid")
 	public String findid() { return "member/findid";}
 	
@@ -121,4 +119,9 @@ public class MemberController {
 	}
 	/* 비밀번호 찾기 */
 	/* 비밀번호 찾기 */
+	
+	
+	/* 마이페이지 */
+	@GetMapping("/member/member")
+	public String member() {  return "member/member"; }
 }
