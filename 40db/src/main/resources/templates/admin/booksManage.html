@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko"   xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+layout:decorate="~{fragments/layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			 // 모달 버튼에 이벤트를 건다.  
+	 	 	$('#openModalBtn').on('click', function(){    
+				 $('#modalBox').modal('show');	
+				 console.log("click open");  }); 
+			 // 모달 안의 취소 버튼에 이벤트를 건다.  
+			 $('#closeModalBtn').on('click', function(){    
+				 $('#modalBox').modal('hide');	
+				 console.log("click close");  
+				 });  
+			 $('#modalBox').on('show.bs.modal', function (e) { 
+					 console.log("show.bs.modal"); 
+					 });  
+			 $('#modalBox').on('shown.bs.modal', function (e) {   
+				 console.log("shown.bs.modal");  
+				 });  
+			 $('#modalBox').on('hide.bs.modal', function (e) {   
+				 console.log("hide.bs.modal");  
+				 });  
+			 $('#modalBox').on('hidden.bs.modal', function (e) {  
+				 console.log("hidden.bs.modal"); 
+				 });
+	    });
+
+		 /* let modal = document.getElementById('openModalBtn');
+		 modal.addEventListener('click',function(){
+			 //alert('클릭');
+			 console.log('클릭');
+		 }); */
+		 /* function btnBookReg(){
+				
+		} */
+		<!-- Vertically centered scrollable modal -->
+	
+	</script>
+</head>
+<body>
+	<th:block layout:fragment="content">
+		<div class="container mt-3">
+		  <h2>도서관리</h2>
+		  <p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>            
+		  <table style="caption-side: top;" class="table table-hover">
+		  <caption>도서리스트</caption>
+		    <thead>
+		      <tr class="table-secondary">
+		        <th>도서번호</th>
+		        <th>도서명</th>
+		        <th>isbn</th>
+		        <th>입고일</th>
+		        <th>삭제</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+		        <td>John</td>
+		        <td>Doe</td>
+		        <td>john@example.com</td>
+		        <td>john@example.com</td>
+		        <td><p><a class="btn btn-warning btn-sm" th:text="삭제"></a> </p></td>
+		      </tr>
+		    </tbody>
+		  </table>
+			  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+			  	<!-- <button class="btn btn-info btn-sm" id="openModalBtn" th:text="도서등록"></button> -->
+			  	<button class="btn btn-info btn-sm" id="openModalBtn" >도서등록</button>
+			  </div>
+			 <!-- modal -->
+		  <div class="modal fade" id="modalBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="myModalLabel">도서검색</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+				<!-- <div class="container">
+					<label for="findBook" class="form-label d-inline-block">도서검색</label>
+					<input type="text" class="form-control d-inline-block" id="findBook">
+					<button class="btn btn-info d-inline-block">검색</button>
+				</div> -->
+				<form th:action="@{/admin/findBook}" method="get">
+					<div class="container">
+						<label for="findBook" class="form-label">도서검색</label>
+						<div class="d-flex">
+							<select name="findKeywords">
+								<option value="title">서명</option>
+								<option value="author">저자</option>
+								<option value="publisher">발행자</option>
+							</select>
+							<input type="text" class="form-control" id="findBook" style="width:200px" placeholder="도서명을 입력하세요">
+							<button type="submit" class="btn btn-info ms-2" id="searchBtn">검색</button>
+						</div>
+					</div>
+				</form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary" id="closeModalBtn">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		</div>
+	</th:block>
+</body>
+</html>

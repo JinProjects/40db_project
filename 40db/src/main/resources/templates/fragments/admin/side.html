@@ -8,24 +8,22 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 </head>
 <body>
 <div th:fragment="side">
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <div class="container-fluid">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link active" href="#">Active</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-</div>
+      <h2>대시보드</h2>
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" th:href="@{/admin/membersManage}">회원관리</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/admin/booksManage}">도서관리</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">희망도서현황</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">반납확인</a>
+        </li>
+      </ul>
+      <hr class="d-sm-none">
+    </div>
 </body>
 </html>

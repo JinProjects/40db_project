@@ -92,10 +92,10 @@ public class bookApi {
 	                    }else if ("categoryName".equals(fieldName)) {
 	                        String categoryName = parser.getValueAsString();
 	                        Category category = new Category();
-	                        category.setBook_category_name(categoryName);
-	                        book.setCategory(
-	                        		category
-	                        		);
+	                     //   category.setBook_category_name(categoryName);
+//	                        book.setCategory(
+//	                        		category
+//	                        		);
 	                        System.out.println("categoryName :: " + categoryName);
 	                    }
 	                }
