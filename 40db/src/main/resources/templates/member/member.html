@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!-- ##1 -->
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body style="background-color:#D9D9D9">
+	<div layout:fragment="content">
+
+		<div class="container d-flex flex-column justify-content-center align-items-center">
+
+			<div class="container bg-secondary rounded-top-5" style="max-width: 1000px; height: 20px;"></div>
+			<div class="container bg-secondary d-flex" style="max-width: 1000px; height: 300px; justify-content: space-evenly;">
+				<section class="col-3 bg-white align-self-center rounded-circle" style="height: 80%;"></section>
+				<section class="col-9 bg-white" style="max-height: 80%">
+				<h1><span>dd</span></h1>
+					<div class="d-flex" style="">
+						<span class="col-1 badge bg-warning align-self-center" style="max-height: 12% ">1</span>
+						<span class="col-1 badge bg-warning align-self-center" style="max-height: 12%">1</span>
+						<span class="col-1 badge bg-warning align-self-center" style="max-height: 12%">1</span>
+					</div>
+				</section>
+			
+			</div>
+			
+			<div class="container bg-secondary" style="max-width: 1000px; height: 10px;"></div>
+			<div class="container bg-secondary rounded-bottom-3" style="max-width: 1000px; height: 800px;">
+			  <div class="d-flex container bg-light rounded-bottom-3 rounded-top-3 justify-content-end" style="max-width: 100%; height: 99%;">
+			  
+			    <div class="d-flex flex-column align-items-end bg-dark" style="height: 100%; width: 20%;">
+			      <div class="bg-warning" style="height: 15%;">dd</div>
+			      <div class="bg-warning" style="height: 15%;">dd</div>
+			      <div class="bg-warning" style="height: 15%;">dd</div>
+			      <div class="bg-warning" style="height: 15%;">dd</div>
+			      <div class="bg-warning" style="height: 15%;">dd</div>
+			      <div class="bg-warning" style="height: 15%;">dd</div>
+			    </div>
+			  
+			  </div>
+			</div>
+
+		</div>
+
+
+		<!-- <h3  th:text="MYPAGE"></h3 -->
+		<!-- 인가 : 권한 -->
+		<!-- <div class="alert alert-info" sec:authorize="hasRole('ADMIN')"   > ADMIN ROLE</div> -->
+		<!-- <div class="alert alert-info" sec:authorize="hasRole('MEMBER')"  > MEMBER ROLE</div> -->
+		<!-- <hr/> -->
+		<!-- 인증 : 신원확인 -->
+		<!-- <div class="alert alert-info" sec:authentication="principal"></div>
+			<div class="alert alert-info" sec:authentication="principal.authorities"></div>
+			<div class="alert alert-info" sec:authentication="principal.username"></div> -->
+
+	</div>
+</body>
+</html>
