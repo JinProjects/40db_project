@@ -21,10 +21,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		        <a class="nav-link text-dark" href="#">홈으로</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link text-dark" href="#">로그인</a>
+		        <a class="nav-link text-dark" th:href="@{/member/login}">로그인</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link text-dark disabled" href="#">회원가입</a>
+		        <a class="nav-link text-dark" th:href="@{/member/login}">회원가입</a>
 		      </li><li class="nav-item">
 		        <a class="nav-link text-dark disabled" href="#">대시보드</a>
 		      </li>
