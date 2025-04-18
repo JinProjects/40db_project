@@ -4,29 +4,30 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 layout:decorate="~{fragments/layout}">
 <head>
-<meta charset="EUC-KR">
+<!-- í•œê¸€ê¹¨ì§ charset="UTF-8" -->
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 		<div th:text="${list}"></div>
 	<div layout:fragment="content">
 		<table class="table table-bordered table-hover text-center">
-			<caption>µµ¼­¸®½ºÆ®</caption>
+			<caption>ë„ì„œë¦¬ìŠ¤íŠ¸</caption>
 			<thead>
 					<tr>
-						<th scope="col">Ä«Å×°í¸®</th>
-						<th scope="col">Á¦¸ñ</th>
-						<th scope="col">ÀúÀÚ</th>
-						<th scope="col">Ã¥¼Ò°³</th>
-						<th scope="col">isbn</th>
-						<th scope="col">ÀÌ¹ÌÁö</th>
-						<th scope="col">Ãâ½ÃÀÏ</th>
-						<th scope="col">ÃâÆÇ»ç</th>
+						<th scope="col" th:text="ì¹´í…Œê³ ë¦¬"></th>
+						<th scope="col" th:text="ì œëª©"></th>
+						<th scope="col" th:text="ì €ì"></th>
+						<th scope="col" th:text="ì±…ì†Œê°œ"></th>
+						<th scope="col" th:text="isbn"></th>
+						<th scope="col" th:text="'ì´ë¯¸ì§€'"></th>
+						<th scope="col" th:text="'ì¶œì‹œì¼'"></th>
+						<th scope="col" th:text="'ì¶œíŒì‚¬'"></th>
 					</tr>
 				</thead>
 				<tbody>
-					<!-- 1 tr:each="	ÇÑ°³, »óÅÂ :	¸®½ºÆ®" -->
-					<!-- 2 tr:text="µ¿ÀûÀ¸·Î ²¨³»¿Â µ¥ÀÌÅÍ" -->
+					<!-- 1 tr:each="	í•œê°œ, ìƒíƒœ :	ë¦¬ìŠ¤íŠ¸" -->
+					<!-- 2 tr:text="ë™ì ìœ¼ë¡œ êº¼ë‚´ì˜¨ ë°ì´í„°" -->
 					<!-- 2 th:href="@{/board/insert}" -->
  					<tr th:each=" dto,state : ${list} " >
 						<!-- <td th:text="${list.getTotalElements-(list.number*list.size)-state.index}" ></td> -->

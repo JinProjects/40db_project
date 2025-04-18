@@ -91,6 +91,7 @@ public class BookApi{
 			
 			//JSONObject body = (JSONObject) itembody.get("title");
 			book.setBookAuthor(itembody.get("author").toString());
+			book.setBookTitle(itembody.get("title").toString());
 			book.setBookIsbn(itembody.get("isbn").toString());
 			book.setBookIntro(itembody.get("description").toString());
 			book.setBookPublishedDate(itembody.get("pubDate").toString());
