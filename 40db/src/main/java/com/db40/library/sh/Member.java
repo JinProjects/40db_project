@@ -1,12 +1,14 @@
 package com.db40.library.sh;
 
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,5 +27,8 @@ public class Member {
 
 	@Column(name="member_warning", nullable=false)private Integer memberWarning = 0;										// 회원경고:0
 
-
+    @Column (name ="password", nullable=false )private String password;
+    
+    @OneToMany (mappedBy ="memberId")
+    private List<InOut> in_out;
 }

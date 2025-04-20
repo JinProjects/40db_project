@@ -1,0 +1,23 @@
+package com.db40.library.sh;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class BooksService {
+	
+	private final BooksRepository booksRepository;
+	
+	public Page<Books> getList(int page) {
+		Pageable pageable = PageRequest.of(page, 10);
+		return this.booksRepository.findAll(pageable);
+	}
+	
+	
+
+}

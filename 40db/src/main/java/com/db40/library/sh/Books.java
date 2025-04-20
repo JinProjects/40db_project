@@ -1,10 +1,13 @@
 package com.db40.library.sh;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -51,6 +54,9 @@ public class Books {
 
 	    @Column(name = "book_hit")
 	    private Integer bookHit;
+	    
+	    @OneToMany (mappedBy = "bookNo")
+	    private List<InOut> in_out;
 	}
 
 
