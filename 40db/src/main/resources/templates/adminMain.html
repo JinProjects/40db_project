@@ -4,6 +4,10 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 layout:decorate="~{fragments/layout}">
 <head>
+<<<<<<< HEAD
+=======
+<!-- 한글깨짐 charset="UTF-8" -->
+>>>>>>> 04266c5caaeec87d2d3787ab5aeb0d6588c4054e
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -14,6 +18,7 @@ layout:decorate="~{fragments/layout}">
 			<caption>도서리스트</caption>
 			<thead>
 					<tr>
+<<<<<<< HEAD
 						<th scope="col">카테고리</th>
 						<th scope="col">제목</th>
 						<th scope="col">저자</th>
@@ -22,6 +27,16 @@ layout:decorate="~{fragments/layout}">
 						<th scope="col">이미지</th>
 						<th scope="col">출시일</th>
 						<th scope="col">출판사</th>
+=======
+						<th scope="col" th:text="카테고리"></th>
+						<th scope="col" th:text="제목"></th>
+						<th scope="col" th:text="저자"></th>
+						<th scope="col" th:text="책소개"></th>
+						<th scope="col" th:text="isbn"></th>
+						<th scope="col" th:text="'이미지'"></th>
+						<th scope="col" th:text="'출시일'"></th>
+						<th scope="col" th:text="'출판사'"></th>
+>>>>>>> 04266c5caaeec87d2d3787ab5aeb0d6588c4054e
 					</tr>
 				</thead>
 				<tbody>

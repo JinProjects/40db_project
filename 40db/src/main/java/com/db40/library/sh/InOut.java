@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 
+import com.db40.library.member.Member;
+
 import lombok.Getter;
 import lombok.Setter;
 

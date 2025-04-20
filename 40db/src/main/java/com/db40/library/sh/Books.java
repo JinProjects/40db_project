@@ -19,7 +19,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Books {
-
 	    @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    @Column(name = "book_no")
@@ -32,7 +31,7 @@ public class Books {
 	    private String bookIntro;
 	    
 	    @ManyToOne
-	    @JoinColumn(name = "book_category_id")
+	    @JoinColumn(name = "book_category_no")
 	    private Category category;
 
 	    @Column(name = "book_title", nullable = false, length = 200)
