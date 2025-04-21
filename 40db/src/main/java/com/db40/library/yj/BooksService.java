@@ -12,10 +12,10 @@ public class BooksService {
 	
 	public void insert(Books books) {
 	//	books.setCategory( //카테고리에 값이 존재하야 에러 안남
-					
 		//		);
 		booksRepository.save(books);
 	}
+	
 	//public Category findCategory(String name) {
 		//booksRepository.find
 	//}
