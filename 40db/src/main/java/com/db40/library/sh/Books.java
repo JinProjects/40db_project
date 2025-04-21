@@ -20,7 +20,7 @@ public class Books {
 	    @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    @Column(name = "book_no")
-	    private Long bookNo;
+	    private Integer bookNo;
 
 	    @Column(name = "book_isbn", length = 100)
 	    private String bookIsbn;
@@ -56,7 +56,7 @@ public class Books {
 	    private Integer bookHit;
 	    
 	    @OneToMany (mappedBy = "bookNo")
-	    private List<InOut> in_out;
+	    private List<InOut> inout;
 	}
 
 

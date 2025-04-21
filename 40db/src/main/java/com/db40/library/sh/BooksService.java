@@ -1,5 +1,7 @@
 package com.db40.library.sh;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +20,10 @@ public class BooksService {
 		return this.booksRepository.findAll(pageable);
 	}
 	
-	
+	public Books getBooks (Integer bookNo) {
+		Optional<Books> books = this.booksRepository.findById(bookNo);
+			return books.get();
+    }
+
 
 }
