@@ -5,7 +5,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -28,15 +31,101 @@ public class BookApi{
 	
 	@Autowired
 	CategoryService categoryService;
-	
-	public List<Books> findBooks(String title) {
+	private static final String BASE_URL = "https://www.aladin.co.kr/ttb/api/ItemSearch.aspx?";
+	public String findBooks(String searchWord, String keyword,String ajax) {
 		List<Books> bookResult = null;
-	  try {	
+		StringBuffer sb = new StringBuffer();
+		try {	
+			Map<String, String> hm = new HashMap<>();
+			hm.put("ttbkey", "ttbduring42771204001");
+			hm.put("Query", "");
+			hm.put("Query", searchWord);
+			hm.put("QueryType", keyword);
+			hm.put("MaxResults", "10");
+			hm.put("start", "1");
+			hm.put("SearchTarget", "Book");
+			hm.put("output", "js");
+			hm.put("Version", "20131101");
 		//#1. URL
 		//		https://openapi.naver.com/v1/search/book.xml	XML
 		//		https://openapi.naver.com/v1/search/book.json	JSON
-		String apiurl = "https://www.aladin.co.kr/ttb/api/ItemSearch.aspx?ttbkey=ttbduring42771204001&Query="+title+"&QueryType=Title&MaxResults=10&start=1&SearchTarget=Book&output=js&Version=20131101";
-		URL url = new URL(apiurl);
+//		String apiurl = "https://www.aladin.co.kr/ttb/api/ItemSearch.aspx?"
+//				+ "ttbkey=ttbduring42771204001&"
+//				+ "Query="+searchWord+"&"
+//				+ "QueryType="+keyword+"&"
+//				+ "MaxResults=10&"
+//				+ "start=1&"
+//				+ "SearchTarget=Book&"
+//				+ "output=js&"
+//				+ "Version=20131101";
+		StringBuffer apiUrl = new StringBuffer();
+		Iterator<String> iter = hm.keySet().iterator();
+		while(iter.hasNext()) {
+			String key = iter.next();
+			String val = hm.get(key);
+			apiUrl.append(key).append("=").append(val).append("&");
+		}
+		URL url = new URL(BASE_URL+apiUrl.toString());
+		//#2. HttpURLConnection
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		//#3. 요청파라미터
+		conn.setRequestMethod("GET");
+		//conn.setRequestProperty("X-Naver-Client-Id", "reu63fdeQl8IXmwLVsRM");
+		//conn.setRequestProperty("X-Naver-Client-Secret", "AvEnm8FcX2"); 
+		
+		//#4. 응답코드 - 200
+		//System.out.println(conn.getResponseCode());
+		int code = conn.getResponseCode();
+		BufferedReader br;
+		if(  code == 200) { br = new BufferedReader(new InputStreamReader(conn.getInputStream()));}
+		else { br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));}
+		//#5. 응답
+		String line="";   
+
+		while(  (line=br.readLine() )     != null ) {
+			sb.append(line+"\n");  
+		}
+		
+		br.close();   conn.disconnect(); 
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sb.toString();
+		
+	}
+	public List<Books> findBooks(String searchWord, String keyword) {
+		List<Books> bookResult = null;
+		try {	
+			Map<String, String> hm = new HashMap<>();
+			hm.put("ttbkey", "ttbduring42771204001");
+			hm.put("Query", "");
+			hm.put("Query", searchWord);
+			hm.put("QueryType", keyword);
+			hm.put("MaxResults", "10");
+			hm.put("start", "1");
+			hm.put("SearchTarget", "Book");
+			hm.put("output", "js");
+			hm.put("Version", "20131101");
+		//#1. URL
+		//		https://openapi.naver.com/v1/search/book.xml	XML
+		//		https://openapi.naver.com/v1/search/book.json	JSON
+//		String apiurl = "https://www.aladin.co.kr/ttb/api/ItemSearch.aspx?"
+//				+ "ttbkey=ttbduring42771204001&"
+//				+ "Query="+searchWord+"&"
+//				+ "QueryType="+keyword+"&"
+//				+ "MaxResults=10&"
+//				+ "start=1&"
+//				+ "SearchTarget=Book&"
+//				+ "output=js&"
+//				+ "Version=20131101";
+		StringBuffer apiUrl = new StringBuffer();
+		Iterator<String> iter = hm.keySet().iterator();
+		while(iter.hasNext()) {
+			String key = iter.next();
+			String val = hm.get(key);
+			apiUrl.append(key).append("=").append(val).append("&");
+		}
+		URL url = new URL(BASE_URL+apiUrl.toString());
 		//#2. HttpURLConnection
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		//#3. 요청파라미터
@@ -56,10 +145,13 @@ public class BookApi{
 		while(  (line=br.readLine() )     != null ) {
 			sb.append(line+"\n");  
 		}
-		System.out.println(sb.toString());
+		
 		bookResult = getBookData(sb.toString());
+		
 		br.close();   conn.disconnect(); 
-		JsonFactory factory = JsonFactory.builder().build();
+		
+		
+		//JsonFactory factory = JsonFactory.builder().build();
 		//JsonParser parser = factory.createParser(sb.toString());
 		
 //		JsonObject jsonObejct = (JSONObject) jsonParser.par
@@ -76,6 +168,7 @@ public class BookApi{
 	  
 	  return bookResult;
 	}
+	
 	private List<Books> getBookData(String str) throws Exception{
 		List<Books> bookList = new ArrayList<>();
 		JSONParser parser = new JSONParser();
