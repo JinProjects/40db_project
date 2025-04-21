@@ -16,7 +16,7 @@
     <input class="form-control me-2 w-75" type="text" placeholder="검색">
     <button class="btn btn-primary " type="button">검색</button>
 	</div>
-  <table class="table table-bordered table-hover text-center">
+  <table class="table table-bordered table-hover text-center hope_user_search">
   <caption>40db wish list</caption>
     <thead>
       <tr>
@@ -29,26 +29,62 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>3</td>
-        <td>로렘입숨</td>
-        <td>로렘</td>
-        <td>입숨출판사</td>
-        <td>2025-04-16</td>
-        <td>신청중</td>
-      </tr>
-	  <tr th:each=" BookHope : ${hope_now} " >
-		<td th:text="${list.size()-state.index}" >1</td>
-		<td th:text="${dto.book_title}"> 책의 제목</td>
-		<td th:text="${dto.book_isbn}" >ISBN</td>
-		<td th:text="${dto.BookHope.book_auther}" >작가</td>
-		<td th:text="${dto.BookHope.book_publisher}" >출판사</td>
-		<td th:text="${dto.BookHope.book_published_date}" >출판일</td>
-		<td th:text="${ #temporals.format(dto.createDate, 'yyyy-MM-dd HH:mm')  }" >신청날짜</td>
-		<td th:text="${dto.book_hope_stat}" >신청상황</td>
-	  </tr>
     </tbody>
   </table>
+  <script th:inline="javascript">
+			$(function(){
+					ajax_api('커피');
+					//$(".book_result").hide();
+					$("#search").on("keyup", function(){
+						$(".hope_user_search").fadeIn();
+						let searchQuery = $(this).val().trim(); //입력값 공백없이 
+						if(searchQuery.length>0){
+							$(".hope_user_search").fadeIn();
+							ajax_api(searchQuery);
+						}
+					});
+			});
+			function ajax_api(search){
+				$.ajax({
+					url:"/hopeBook/hope_usersearch/" + search,
+					type:"GET",
+					datatype:"json",
+					contentType:"application/json;charset=UTF-8",
+					error:function(xhr, status, msg){alert(status+"/"+msg)},
+					success:function(json){ 
+						$(".hope_user_search tbody").empty();
+						if( json && json.items && json.items.length>0 ){
+						console.log("json:"+json);
+							let items = json.item;
+							for(let i=0; i<items.length; i++){
+								//1. 데이터 가져오기
+								let title=items[i].title;
+								let author=items[i].author;
+								let publisher=items[i].publisher;
+								let pubdate=items[i].pubdate;
+								let isbn13=items[i].isbn13;
+								//2. tbody 행 추가 `템플릿 리터럴` 
+								let row = `
+									<tr>
+										<td th:text="${i}" ></td>
+										<td>${title}</td>
+										<td>${author}</td>
+										<td>${publisher}</td>
+										<td>${pubdate}</td>
+										<td>${isbn13}</td>
+									</tr>
+								`;
+								$(".hope_user_search tbody").append(row);
+							}
+						}else{
+							console.log("empty");
+						}
+						}//end if
+					}
+				});
+			}
+			
+		</script>
 </form>
 </div>
 </div>
