@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -85,16 +86,26 @@ public class MemberController {
 		model.addAttribute("memberForm", memberForm);
 		return "member/join";
 	}
-//	@GetMapping("/naver")
-//	public String naveruser(@RequestParam("code") String code, Model model) {
-//		List<String>  info = naver.identified(code);
-//		model.addAttribute("nickname"  , info.get(0));  
-//		
-//		MemberForm memberForm = new MemberForm();
-//		memberForm.setDisplayName(info.get(0)); // nickname -> displayName으로 매핑
-//		model.addAttribute("memberForm", memberForm);
-//		return "member/join";
-//	}
+	@GetMapping("/naver")
+	public String naveruser(@RequestParam("code") String code, Model model) {
+		List<String> infos = naver.identified(code);
+		model.addAttribute("nickname", infos.get(0));
+		model.addAttribute("name", infos.get(1));
+		model.addAttribute("gender", infos.get(2));
+		model.addAttribute("email", infos.get(3));
+		
+		MemberForm memberForm = new MemberForm();
+		memberForm.setDisplayName(infos.get(0));
+		memberForm.setRealName(infos.get(1));
+		String genderString = infos.get(2);
+		char genderChar = genderString.charAt(0);
+		memberForm.setGender(genderChar);
+		memberForm.setEmail(infos.get(3));
+		model.addAttribute("memberForm", memberForm);
+	   
+
+	    return "member/join";
+	}
 	
 	/* 통합 회원가입 ( 일반, 카카오, 네이버 ) */	
 
