@@ -5,6 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>사용자 로그인</title>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- CKEditor 로드 -->
+<script src="//cdn.ckeditor.com/4.25.1/standard/ckeditor.js"></script> 
 
 	<div layout:fragment="content">
 
@@ -62,9 +66,9 @@
 				
 					<h3 class="text-center mb-4 fw-bold">회원가입</h3>
 					<br>
-					<a th:href="@{/member/join}" class="btn btn-outline-primary">휴대폰 번호로 가입하기</a><br>
-					<a href="" class="btn btn-outline-warning">카카오로 가입하기</a><br>
-					<a href="" class="btn btn-outline-success">네이버로 가입하기</a><br>
+					<a th:href="@{/member/join}" class="btn btn-outline-primary" style="margin: 0 12px">휴대폰 번호로 가입하기</a><br>
+					<a th:href="${kakao}" class="container"><img th:src="@{/images/kakao_login_medium_wide.png}" alt="kakao-login" style="width:100%; height:100%; object-fit: cover;"></a><br>
+					<a th:href="${naver}" class="container"><img th:src="@{/images/naver_wide.png}" alt="naver-login" style="width:100%; height:58%; object-fit: cover; border-radius: 6px" ></a><br>
 					<a href="" class="btn btn-outline-secondary">구글로 가입하기</a><br>
 				</div>
 			</div>

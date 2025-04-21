@@ -1,6 +1,6 @@
 package com.db40.library.member;
 
-import java.util.Optional;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -16,15 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MemberController {
 	
-	@Autowired   MemberService service;
+	@Autowired MemberService service;
+	@Autowired KaKaoLogin kakao;
+	@Autowired NaverLogin naver;
 
-	/* 기본 로그인 페이지 */
-	@GetMapping("/member/login")
-	public String login() {  return "member/login"; }
-	
 	/* 기본 회원가입 페이지 */
 	@GetMapping("/member/join")
-	public String join(MemberForm memberForm) {  return "member/join"; }
+	public String join(MemberForm memberForm) {	
+		return "member/join"; }
 	
 	/* 기본 회원가입 기능 */
 	@PostMapping("/member/join")
@@ -64,6 +63,40 @@ public class MemberController {
 		return "member/login"; 
 	}
 	
+	/* 통합 회원가입 ( 일반, 카카오, 네이버 ) */
+	/* 통합 회원가입 ( 일반, 카카오, 네이버 ) */
+	// 통합 로그인 / 회원가입
+	@GetMapping("/member/login") 
+		public String identify(Model model) {
+			model.addAttribute("kakao", kakao.identify());	// 카카오
+			model.addAttribute("naver", naver.identify());	// 네이버
+			return "member/login";
+		}
+	
+	// localhot:8080/kakao 사용자 정보 가져오기 - 카카오
+	@GetMapping("/kakao")
+	public String  kakaouser(@RequestParam("code") String code, Model model) {
+		List<String>  infos = kakao.identified(code);
+		model.addAttribute("nickname"  , infos.get(0));  
+		model.addAttribute("profile_image"  , infos.get(1));
+		
+		MemberForm memberForm = new MemberForm();
+		memberForm.setDisplayName(infos.get(0)); // nickname -> displayName으로 매핑
+		model.addAttribute("memberForm", memberForm);
+		return "member/join";
+	}
+//	@GetMapping("/naver")
+//	public String naveruser(@RequestParam("code") String code, Model model) {
+//		List<String>  info = naver.identified(code);
+//		model.addAttribute("nickname"  , info.get(0));  
+//		
+//		MemberForm memberForm = new MemberForm();
+//		memberForm.setDisplayName(info.get(0)); // nickname -> displayName으로 매핑
+//		model.addAttribute("memberForm", memberForm);
+//		return "member/join";
+//	}
+	
+	/* 통합 회원가입 ( 일반, 카카오, 네이버 ) */	
 
 	/* 아이디 찾기 */
 	/* 아이디 찾기 */
