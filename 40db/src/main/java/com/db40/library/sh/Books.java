@@ -1,14 +1,19 @@
 package com.db40.library.sh;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,8 +32,8 @@ public class Books {
 	    @Column(name = "book_isbn", length = 100)
 	    private String bookIsbn;
 
-	    @Column(name = "book_intro", length = 300)
-	    private String bookIntro;
+	    @Column(name = "book_description", length = 300)
+	    private String bookDescription;
 	    
 	    @ManyToOne
 	    @JoinColumn(name = "book_category_no")
@@ -49,17 +54,20 @@ public class Books {
 	    @Column(name = "book_pulished_date", length = 100)
 	    private String bookPublishedDate;
 
-	    @Column(name = "book_total_page", length = 100)
-	    private String bookTotalPage;
-
-	    @Column(name = "book_writer_info", length = 200)
-	    private String bookWriterInfo;
-
 	    @Column(name = "book_entered_date", length = 100)
-	    private String bookEnteredDate;
+	    @CreationTimestamp
+	    private LocalDateTime bookEnteredDate;
 
 	    @Column(name = "book_hit")
+	    @ColumnDefault("0")
 	    private Integer bookHit;
+
+		@Override
+		public String toString() {
+			return "Books [bookNo=" + bookNo + ", bookIsbn=" + bookIsbn + ", bookDescription=" + bookDescription
+					+ ", bookTitle=" + bookTitle + ", bookCover=" + bookCover + ", bookAuthor=" + bookAuthor
+					+ ", bookPublisher=" + bookPublisher + ", bookPublishedDate=" + bookPublishedDate
+					+ ", bookEnteredDate=" + bookEnteredDate + ", bookHit=" + bookHit + "]";
+		}
+	    
 	}
-
-

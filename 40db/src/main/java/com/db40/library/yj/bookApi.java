@@ -71,7 +71,7 @@ public class bookApi {
 	                        System.out.println("author :: " + author);
 	                    } else if ("description".equals(fieldName)) {
 	                        String bookIntro = parser.getValueAsString();
-	                        book.setBookIntro(bookIntro);
+	                        book.setBookDescription(bookIntro);
 	                        System.out.println("bookIntro :: " + bookIntro);
 	                    }else if ("isbn".equals(fieldName) || "isbn13".equals(fieldName)) {
 	                        String isbn = parser.getValueAsString();
