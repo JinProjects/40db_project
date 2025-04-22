@@ -1,1 +1,8 @@
 /.metadata/
+/40db/.gitattributes
+.gitignore
+/40db/mvnw.*
+/40db/mvnw
+/40db/.mvn/wrapper/
+/Servers/
+/40db/src/main/resources/application.properties
