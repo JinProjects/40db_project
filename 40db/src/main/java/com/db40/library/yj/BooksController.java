@@ -21,6 +21,7 @@ public class BooksController {
 	@GetMapping("/admin/main")
 	public String test(Model model) {
 		//model.addAttribute("list", bookApi.findBooks("java"));
+
 		return "adminMain";
 	}
 	@GetMapping("/books/bookDelete/{bookNo}")
@@ -33,7 +34,7 @@ public class BooksController {
 	@ResponseBody
 	public String bookJson(@PathVariable String searchWord, @PathVariable String selectKeyword
 							, @RequestParam(value="ajax", required = false) String ajax) {
-		System.out.println("ajax실행");
+		
 		return bookApi.findBooks(searchWord, selectKeyword, ajax);
 	}
 }
