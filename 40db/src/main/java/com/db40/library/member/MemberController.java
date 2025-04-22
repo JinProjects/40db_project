@@ -1,10 +1,12 @@
 package com.db40.library.member;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -71,6 +73,7 @@ public class MemberController {
 		public String identify(Model model) {
 			model.addAttribute("kakao", kakao.identify());	// 카카오
 			model.addAttribute("naver", naver.identify());	// 네이버
+			//model.addAttribute("google", google.identify()); // 구글
 			return "member/login";
 		}
 	
@@ -78,33 +81,56 @@ public class MemberController {
 	@GetMapping("/kakao")
 	public String  kakaouser(@RequestParam("code") String code, Model model) {
 		List<String>  infos = kakao.identified(code);
-		model.addAttribute("nickname"  , infos.get(0));  
-		model.addAttribute("profile_image"  , infos.get(1));
-		
-		MemberForm memberForm = new MemberForm();
-		memberForm.setDisplayName(infos.get(0)); // nickname -> displayName으로 매핑
-		model.addAttribute("memberForm", memberForm);
-		return "member/join";
-	}
-	@GetMapping("/naver")
-	public String naveruser(@RequestParam("code") String code, Model model) {
-		List<String> infos = naver.identified(code);
-		model.addAttribute("nickname", infos.get(0));
-		model.addAttribute("name", infos.get(1));
-		model.addAttribute("gender", infos.get(2));
-		model.addAttribute("email", infos.get(3));
+		// 성별 타입 변환
+		String gend = infos.get(3).toUpperCase();
+		char gendchar = gend.charAt(0);
+		// 휴대전화번호 타입 변환
+		String mobile = infos.get(4);
+		String formatmobile = mobile.replace("+82", "0").replaceAll("[^0-9]", "");
+		// 생년월일 타입 변환
+		String birthdate = infos.get(6)+infos.get(5);
+		DateTimeFormatter inputbirth = DateTimeFormatter.ofPattern("yyyyMMdd");
+		LocalDate inputbirthdate = LocalDate.parse(birthdate, inputbirth);
+		DateTimeFormatter outputbirth = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String formatbirth = inputbirthdate.format(outputbirth);
 		
 		MemberForm memberForm = new MemberForm();
 		memberForm.setDisplayName(infos.get(0));
-		memberForm.setRealName(infos.get(1));
-		String genderString = infos.get(2);
-		char genderChar = genderString.charAt(0);
-		memberForm.setGender(genderChar);
-		memberForm.setEmail(infos.get(3));
+		memberForm.setEmail(infos.get(1));
+		memberForm.setRealName(infos.get(2));
+		memberForm.setGender(gendchar);
+		memberForm.setMobileNumber(formatmobile);
+		memberForm.setBirthDate(LocalDate.parse(formatbirth));
 		model.addAttribute("memberForm", memberForm);
-	   
-
-	    return "member/join";
+		kakao.unlink();
+		return "member/join";
+	}
+	
+	@GetMapping("/naver")
+	public String naveruser(@RequestParam("code") String code, String state, Model model) {
+		List<String> infos = naver.identified(code, state);
+		// 성별 타입 변환
+		char genderchar = infos.get(3).charAt(0);
+		// 생년월일 변환
+		String birthdate = infos.get(5)+(infos.get(4).replaceAll("[^0-9]", ""));
+		DateTimeFormatter inputbirth = DateTimeFormatter.ofPattern("yyyyMMdd");
+		LocalDate inputbirthdate = LocalDate.parse(birthdate, inputbirth);
+		DateTimeFormatter outputbirth = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String formatbirth = inputbirthdate.format(outputbirth);
+		// 휴대전화번호 변환
+		String mobile = infos.get(6).replaceAll("[^0-9]", "");
+		
+		MemberForm memberForm = new MemberForm();
+		memberForm.setRealName(infos.get(0));
+		memberForm.setEmail(infos.get(1));
+		memberForm.setDisplayName(infos.get(2));
+		memberForm.setGender(genderchar);
+		memberForm.setBirthDate(LocalDate.parse(formatbirth));
+		memberForm.setMobileNumber(mobile);
+		
+		model.addAttribute("memberForm", memberForm);
+		naver.unlink();
+		return "member/join";
 	}
 	
 	/* 통합 회원가입 ( 일반, 카카오, 네이버 ) */	
