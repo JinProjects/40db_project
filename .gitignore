@@ -5,4 +5,8 @@
 /40db/mvnw
 /40db/.mvn/wrapper/
 /Servers/
+<<<<<<< HEAD
 /40db/src/main/resources/application.properties
+=======
+/40db/src/main/resources/application.properties
+>>>>>>> 84a4315a2ce10bb7cd7217b745817a8b71f9f225
