@@ -31,6 +31,7 @@ layout:decorate="~{fragments/layout}">
 		        <th>회원상태</th>
 		        <th>가입일</th>
 		        <th>IP</th>
+		        <th>수정</th>
 		        <th>탈퇴</th>
 		      </tr>
 		    </thead>
@@ -42,9 +43,10 @@ layout:decorate="~{fragments/layout}">
 		        <td th:text="${dto.mobileNumber}"></td>
 		        <td th:text="|${dto.addressPost} ${dto.addressRoad} ${dto.addressJibun} ${dto.addressDetail}|"></td>
 		        <td th:text="${dto.memberWarning}"></td>
-		        <td th:text="${dto.member_status.memberStatus}"></td>
+		        <td th:text="${dto.memberStatus.status}"></td>
 		        <td th:text="${#temporals.format(dto.memberJoinDate,'yyyy-MM-dd')}"></td>
 		        <td th:text="${dto.joinIp}"></td>
+		        <td><p><a class="btn btn-warning btn-sm" th:href="@{|/admin/memberUpdate/${dto.memberStatus.status}|}" th:text="수정"></a> </p></td>
 		        <td><p><a class="btn btn-warning btn-sm" th:href="@{|/admin/memberDelete/${dto.memberId}|}" th:text="탈퇴"></a> </p></td>
 		      </tr>
 		        </div>

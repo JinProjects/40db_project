@@ -1,13 +1,19 @@
 package com.db40.library.yj.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.db40.library.member.Member;
 import com.db40.library.member.MemberStatus;
@@ -47,7 +53,13 @@ public class AdminController {
 		return "admin/membersManage";
 	}
 	
+	@PostMapping("/admin/memberUpdate/${status}")
+	@ResponseBody
+	public List<> memberUpdate(String status) {		
+		return "";
+	}
 	
+	//======bookManage=================================================================
 	
 	@GetMapping("/admin/booksManage")
 	public String booksManage(Model model) {
@@ -59,15 +71,60 @@ public class AdminController {
 	public String findBook() {
 		return ""; 
 	}
+	//도서등록
 	@PostMapping("/admin/insertBook")
-	public String insertBook(Books book, @RequestParam String bookCategoryName) {
-		Category category = categoryRepository.findByBookCategoryName(bookCategoryName).get();
+	@ResponseBody
+	public ResponseEntity<?> insertBook(@RequestBody Books book, @RequestParam String bookCategoryName) {
+		System.out.println("bookCategoryName:"+bookCategoryName);
+		System.out.println("getBookIsbn:"+book.getBookIsbn());
+		
+		try {
+		Category category = categoryRepository.findByBookCategoryName(bookCategoryName)
+											.orElseThrow(()-> new RuntimeException("카테고리를 찾을 수 없습니다: "+book.getCategory().getBookCategoryName()));
 		category.setBookCategoryName(bookCategoryName);
 		book.setCategory(category);
 		
-		booksRepository.save(book);
-		
-		return "redirect:booksManage";
+		int cnt = booksRepository.findByIsbn(book.getBookIsbn());
+		String msg = "exist";
+		if(cnt == 0) {
+			msg = "success";
+			booksRepository.save(book);
+		}
+		return ResponseEntity.ok(Map.of("status",msg));
+		}catch (Exception e) {
+				e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("status","error"));
+		}
 	}
+	//도서 중복체크 후 등록
+	@PostMapping("/admin/existBookReg")
+	@ResponseBody
+	public ResponseEntity<?> existBookReg(@RequestBody Books book, @RequestParam String bookCategoryName){
+		try {
+			Category category = categoryRepository.findByBookCategoryName(bookCategoryName).orElseThrow(()->new RuntimeException("카테고리를 찾을 수 없습니다."+book.getCategory().getBookCategoryName()));
+			book.setCategory(category);
+			booksRepository.save(book);
+			return ResponseEntity.ok(Map.of("status","success"));
+		}catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("status","error"));
+		}
+	}
+	
+	
+//	@PostMapping("/admin/bookChk")
+//	@ResponseBody
+//	public ResponseEntity<?> bookChk(@RequestBody Books book, @RequestParam String msg, @RequestParam String bookCategoryName){
+//		Category category = categoryRepository.findByBookCategoryName(bookCategoryName)
+//												.orElseThrow(()->new RuntimeException("카테고리를 찾을 수 없습니다."+book.getCategory().getBookCategoryName()));
+//		book.setCategory(category);
+//		System.out.println("getBookAuthor():"+book.getBookAuthor());
+//		System.out.println("bookCategoryName:"+bookCategoryName);
+//		if(msg.equals("exist")) {
+//			//booksRepository.save(book);
+//		}
+//		
+//		return ResponseEntity.ok(Map.of("status","success"));
+//	}
 	
 }
