@@ -22,6 +22,7 @@ public class MemberController {
 	@Autowired MemberService service;
 	@Autowired KaKaoLogin kakao;
 	@Autowired NaverLogin naver;
+	@Autowired GoogleLogin google;
 
 	/* 기본 회원가입 페이지 */
 	@GetMapping("/member/join")
@@ -73,7 +74,7 @@ public class MemberController {
 		public String identify(Model model) {
 			model.addAttribute("kakao", kakao.identify());	// 카카오
 			model.addAttribute("naver", naver.identify());	// 네이버
-			//model.addAttribute("google", google.identify()); // 구글
+			model.addAttribute("google", google.identify()); // 구글
 			return "member/login";
 		}
 	
@@ -130,6 +131,16 @@ public class MemberController {
 		
 		model.addAttribute("memberForm", memberForm);
 		naver.unlink();
+		return "member/join";
+	}
+	@GetMapping("/google")
+	public String googleuser(@RequestParam("code") String code, Model model) {
+		List<String> infos = google.identified(code);
+		
+		MemberForm memberForm = new MemberForm();
+		memberForm.setEmail(infos.get(0));
+		model.addAttribute("memberForm", memberForm);
+		
 		return "member/join";
 	}
 	
@@ -194,4 +205,9 @@ public class MemberController {
 	/* 마이페이지 */
 	@GetMapping("/member/member")
 	public String member() {  return "member/member"; }
+	
+	@GetMapping("/member/settings/borrow")
+	public String myBorrowPage() {
+	    return "member/memberSetting/mypageBorrow";
+	}
 }

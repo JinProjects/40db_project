@@ -29,6 +29,7 @@ public class MemberService {
 		} catch (UnknownHostException e) { e.printStackTrace();}
 		return memberRepository.save(member);
 	}
+	
 	// 실명과 휴대폰 번호로 id찾기
 	public Long forFindId(String name, String mobile) {
 		Long findid = memberRepository.findIdByRealNameAndMobile(name, mobile);

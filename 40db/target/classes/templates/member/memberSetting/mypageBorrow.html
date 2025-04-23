@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<html lang="ko"   xmlns:th="http://www.thymeleaf.org" 
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-layout:decorate="~{member/member}">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{member/member}">
 
+<head>
+    <title>대출 조회</title>
+</head>
 
-   <div layout:fragment="subcontent">
-
-		<div class="container py-3" style="max-width:85%" id="mypageForBorrow">
-				<h2 class="d-flex justify-content-start">대출조회</h2>
-		</div>
-		
-   </div>
+<body>
+    <div layout:fragment="subcontent">
+        <div class="container py-3" style="max-width:85%" id="mypageForBorrow">
+            <h2 class="d-flex justify-content-start">대출조회</h2>
+            <div class="btn btn-warning">ddd</div>
+        </div>
+    </div>
+</body>
+</html>

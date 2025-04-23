@@ -26,6 +26,10 @@ public interface MemberRepository  extends JpaRepository<Member, Long>{
 	@Modifying @Transactional
 	@Query("update Member m set m.memberPass=:pass where m.id=:id")
 	void updatePasswordById(Long id, String pass);
+	
+	/* api를 활용한 이메일 중복 시 바로 로그인 */
+	@Query("select m from Member m where m.email=:email")
+	int finyIdbyEmail(String email);
 		
 }
 
