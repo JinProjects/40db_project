@@ -1,5 +1,6 @@
 package com.db40.library.sh;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -43,14 +47,9 @@ public class Books {
 	    @Column(name = "book_pulished_date", length = 100)
 	    private String bookPublishedDate;
 
-	    @Column(name = "book_total_page", length = 100)
-	    private String bookTotalPage;
-
-	    @Column(name = "book_writer_info", length = 200)
-	    private String bookWriterInfo;
-
-	    @Column(name = "book_entered_date", length = 100)
-	    private String bookEnteredDate;
+       @Column(name = "book_entered_date", length = 100)
+       @CreationTimestamp
+	    private LocalDateTime bookEnteredDate;
 
 	    @Column(name = "book_hit")
 	    private Integer bookHit;

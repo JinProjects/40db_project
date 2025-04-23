@@ -25,14 +25,21 @@
 			class="btn btn-outline-secondary dropdown-toggle"
 			data-bs-toggle="dropdown" aria-expanded="false"
 			data-bs-auto-close="true">검색 조건</button>
-		<ul class="dropdown-menu">
+			<select>
+			<option value="도서명"></option>
+			<option value="저자"></option>
+			<option value="출판사"></option>
+			</select>
+			
+			
+<!-- 		<ul class="dropdown-menu">
 			<li><a class="dropdown-item" href="#" data-category="title"
 				onclick="this.closest('.dropdown').querySelector('.dropdown-toggle').textContent = '도서명'">도서명</a></li>
 			<li><a class="dropdown-item" href="#" data-category="author"
 				onclick="this.closest('.dropdown').querySelector('.dropdown-toggle').textContent = '저자'">저자</a></li>
 			<li><a class="dropdown-item" href="#" data-category="publisher"
 				onclick="this.closest('.dropdown').querySelector('.dropdown-toggle').textContent = '출판사'">출판사</a></li>
-		</ul>
+		</ul> -->
 		<input type="text" class="form-control" placeholder="검색어를 입력하세요"
 			aria-label="Search">
 		<button class="btn btn-success" type="submit">검색</button>

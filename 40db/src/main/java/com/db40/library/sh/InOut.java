@@ -43,13 +43,20 @@ public class InOut {
 	@Column(name = "due_date")
 	private LocalDateTime dueDate;
 	
+	@Column (name = "remain_days")
+	private Long remainDays; 
+	
 	@Column (name = "overdue_days")
 	private Long overdueDays; 
 	
+	@Column(name = "return_date", nullable=true)
+	private LocalDateTime returnDate;
+	
 	@PrePersist
 	public void setInitialDates() {
-		this.dueDate = this.borrowDate.plusDays(15);
-		this.overdueDays = ChronoUnit.DAYS.between(LocalDateTime.now(), this.dueDate);
+		this.dueDate = this.borrowDate.plusMinutes(3);
+		this.remainDays = 3L;
+		//this.overdueDays = ChronoUnit.DAYS.between(LocalDateTime.now(), this.dueDate);
 
 
 	}
