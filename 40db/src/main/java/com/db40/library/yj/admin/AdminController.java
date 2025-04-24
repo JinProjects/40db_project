@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +30,6 @@ public class AdminController {
 	AdminRepository adminRepository;
 	@Autowired
 	MemberStatusRepository memberStatusRepository;
-	
 	@Autowired
 	BooksService booksService;
 	@Autowired
@@ -53,11 +51,23 @@ public class AdminController {
 		return "admin/membersManage";
 	}
 	
-	@PostMapping("/admin/memberUpdate/${status}")
-	@ResponseBody
-	public List<> memberUpdate(String status) {		
-		return "";
+	@PostMapping("/admin/memberUpdate")
+	public String memberUpdate(@RequestParam String memberId, @RequestParam String statusVal) {
+		System.out.println("memberId="+memberId);
+		Member member = adminRepository.findByMemberId(memberId).orElseThrow(()->new RuntimeException("회원을 찾을 수 없습니다."+memberId));
+		MemberStatus status = new MemberStatus();
+		status.setId(Integer.parseInt(statusVal));
+		member.setMemberStatus(status);
+		
+		adminRepository.save(member);
+		
+		return "redirect:membersManage";
 	}
+//	@PostMapping("/admin/memberUpdate/${status}")
+//	@ResponseBody
+//	public List<> memberUpdate(String status) {		
+//		return "";
+//	}
 	
 	//======bookManage=================================================================
 	
