@@ -1,10 +1,13 @@
 package com.db40.library.member;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +16,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MemberController {
 	
+	@Autowired MemberRepository mR;
 	@Autowired MemberService service;
 	@Autowired KaKaoLogin kakao;
 	@Autowired NaverLogin naver;
@@ -26,12 +32,15 @@ public class MemberController {
 
 	/* 기본 회원가입 페이지 */
 	@GetMapping("/member/join")
-	public String join(MemberForm memberForm) {	
+	public String join(HttpServletRequest request, Principal principal, MemberForm memberForm) {
+		if ( principal != null) {
+			return "member/mypage/recentBorrow";
+		}
 		return "member/join"; }
 	
 	/* 기본 회원가입 기능 */
 	@PostMapping("/member/join")
-	public String join(@Valid MemberForm memberForm , BindingResult bindingResult) {  
+	public String join(@Valid MemberForm memberForm, BindingResult bindingResult) {  
 		
 		if(bindingResult.hasErrors()) { return "member/join"; }
 		if( !memberForm.getMemberPass().equals(  memberForm.getPassword2()) ) {
@@ -57,7 +66,7 @@ public class MemberController {
 			service.insertMember(member);
 		}catch(DataIntegrityViolationException e) { // 무결성- 중복키, 외래키제약, 데이터형식불일치
 			e.printStackTrace();
-			bindingResult.reject("failed" , "등록된 유저입니다.");
+			bindingResult.reject("failed" , "정보를 다시 확인해주세요.");
 			return "member/join"; 
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -69,9 +78,12 @@ public class MemberController {
 	
 	/* 통합 회원가입 ( 일반, 카카오, 네이버 ) */
 	/* 통합 회원가입 ( 일반, 카카오, 네이버 ) */
-	// 통합 로그인 / 회원가입
+	// 통합 로그인 / 회원가입 / 로그인 된 유저일 경우 마이페이지로 이동
 	@GetMapping("/member/login") 
-		public String identify(Model model) {
+		public String identify(HttpServletRequest request, Principal principal, Model model) {
+			if(principal != null) {
+				return "member/mypage/recentBorrow";
+			}
 			model.addAttribute("kakao", kakao.identify());	// 카카오
 			model.addAttribute("naver", naver.identify());	// 네이버
 			model.addAttribute("google", google.identify()); // 구글
@@ -203,11 +215,45 @@ public class MemberController {
 	
 	
 	/* 마이페이지 */
-	@GetMapping("/member/member")
-	public String member() {  return "member/member"; }
+	/* 마이페이지 */
+	@GetMapping("/member/mypage/main")
+	public String mypageMain() {  return "member/mypage/recentBorrow"; }
 	
-	@GetMapping("/member/settings/borrow")
-	public String myBorrowPage() {
-	    return "member/memberSetting/mypageBorrow";
+	@GetMapping("/member/mypage/upass")
+	public String mypageUpw() {
+	    return "member/mypage/updatePassword"; }
+	
+//	@PostMapping("/member/mypage/upass")
+//	public String updatePasswordInMypage() {
+//		
+//	}
+	
+	// 중복체크
+	// 아이디
+	@ResponseBody
+	@GetMapping("/member/join/reduplicationMId/{memberId}")
+	public Map<String, Object> reduplicationMIdCheck(@PathVariable String memberId) {
+	    Map<String, Object> resultMId = new HashMap<>();
+	    
+	    boolean exists = mR.findByMemberId(memberId).isPresent(); // true = 이미 존재
+
+	    resultMId.put("resultMId", exists ? "사용불가" : "사용가능");
+	    return resultMId;
+	}
+	// 이메일
+	@ResponseBody
+	@GetMapping("/member/join/reduplicationEmail/{email}")
+	public Map<String, Object> reduplicationEmailCheck(@PathVariable String email) {
+	    Map<String, Object> resultEmail = new HashMap<>();
+	    
+	    boolean exists = mR.findByEmail(email).isPresent(); // true = 이미 존재
+
+	    resultEmail.put("resultEmail", exists ? "사용불가" : "사용가능");
+	    return resultEmail;
+	}
+	
+	@GetMapping("/getDisplayNameByMemberId") @ResponseBody
+	public String getDisplayNameByMemberId(@RequestParam String memberId) {
+	    return service.selectdisplayNameByMemberId(memberId);
 	}
 }

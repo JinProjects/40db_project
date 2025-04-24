@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface MemberRepository  extends JpaRepository<Member, Long>{
-	Optional<Member>	  findByMemberId(String memberId);
 	
 	@Modifying  
 	@Transactional  
@@ -30,6 +29,12 @@ public interface MemberRepository  extends JpaRepository<Member, Long>{
 	/* api를 활용한 이메일 중복 시 바로 로그인 */
 	@Query("select m from Member m where m.email=:email")
 	int finyIdbyEmail(String email);
+	
+	@Query("select m from Member m where m.memberId=:memberId")
+	Optional<Member> findByMemberId(String memberId);	
+	
+	@Query("select m from Member m where m.email=:email")
+	Optional<Member> findByEmail(String email);	
 		
 }
 

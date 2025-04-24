@@ -46,5 +46,4 @@ public class Member {
 	// 계정 상태
 	@ManyToOne @JoinColumn(name="member_status", nullable=false) private MemberStatus memberStatus;
 	
-
 }
