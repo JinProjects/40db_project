@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko"   xmlns:th="http://www.thymeleaf.org" 
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{fragments/layout}">
+<head>
+<meta charset="UTF-8">
+<title>40db wish list</title>
+</head>
+<body>
+<div layout:fragment="content" class="container pt-5">
+		<script> 
+		    let msg = "[[${msg}]]";   
+		    //오류나면 주석지우기    Thymeleaf 데이터 바이딩- 서버에서 js 코드 전달
+		    if( msg == 'fail'){ history.go(-1); alert("정보를 확인해주세요.");}
+			else if(msg.length != 0){ alert( msg ); }
+		</script>
+
+</div>
+</body>
+</html>
