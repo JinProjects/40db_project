@@ -140,26 +140,23 @@ body {
 				<!-- 사용자 ID -->
 
 				<div class="form-floating mb-3">
-					<input type="text" name="memberId" id="memberId"
-						class="form-control" placeholder="사용자ID"> <label
-						for="username">사용자ID</label> <span
-						class="d-flex justify-content-end"><a
-						th:href="@{/member/findid}"
-						; class="d-inline-flex justify-content-end"
-						style="font-size: 11px; text-decoration: none; color: gray;">아이디가
-							기억나지 않습니다</a></span>
+					<input type="text" name="memberId" id="memberId" class="form-control" placeholder="사용자ID">
+					<label for="memberId">사용자ID</label>
+					<span class="d-flex justify-content-end">
+					<a th:href="@{/member/findid}" 
+					class="d-inline-flex justify-content-end" 
+					style="font-size: 11px; text-decoration: none; color: gray;">아이디가 기억나지 않습니다</a></span>
 				</div>
 
 				<!-- 비밀번호 -->
 				<div class="form-floating mb-4">
 					<input type="password" name="memberPass" id="memberPass"
 						class="form-control password" placeholder="비밀번호"> <label
-						for="password" id="passlabel">비밀번호</label> <span
+						for="memberPass" id="passlabel">비밀번호</label> <span
 						class="d-flex justify-content-end"><a
 						th:href="@{/member/findpw}"
-						; class="d-inline-flex justify-content-end"
-						style="font-size: 11px; text-decoration: none; color: gray;">비밀번호가
-							기억나지 않습니다</a></span>
+						class="d-inline-flex justify-content-end"
+						style="font-size: 11px; text-decoration: none; color: gray;">비밀번호가 기억나지 않습니다</a></span>
 
 					<!-- 아이디/비밀번호 미일치 -->
 					<div th:if="${param.error}" class="d-flex justify-content-center">

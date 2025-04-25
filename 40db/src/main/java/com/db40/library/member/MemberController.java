@@ -12,6 +12,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -220,13 +221,26 @@ public class MemberController {
 	public String mypageMain() {  return "member/mypage/recentBorrow"; }
 	
 	@GetMapping("/member/mypage/upass")
-	public String mypageUpw() {
-	    return "member/mypage/updatePassword"; }
+	public String mypageUpdatePassword() {
+		 return "member/mypage/updatePassword";
+	}
 	
-//	@PostMapping("/member/mypage/upass")
-//	public String updatePasswordInMypage() {
-//		
-//	}
+	@PostMapping("/member/mypage/upass")
+	public String mypageUpdatePassword_post(String memberId, String oldpassword, String newpassword) {
+		Long id = service.selectUserMemberId(memberId).getId();
+		service.updatePasswordInMypage(newpassword, id, oldpassword);
+		return "member/mypage/updatePassword";
+	}
+	
+	@GetMapping("/member/mypage/uemail")
+	public String mypageUpdateEmail() { return "member/mypage/updateEmail"; }
+	
+	@GetMapping("/member/mypage/uaddress")
+	public String mypageUpdateAddress(String memberId, Model model) {
+		return "member/mypage/updateAddress"; }
+	
+	/* 마이페이지 */
+	
 	
 	// 중복체크
 	// 아이디
@@ -246,14 +260,37 @@ public class MemberController {
 	public Map<String, Object> reduplicationEmailCheck(@PathVariable String email) {
 	    Map<String, Object> resultEmail = new HashMap<>();
 	    
-	    boolean exists = mR.findByEmail(email).isPresent(); // true = 이미 존재
+	    boolean exists = mR.findByEmail(email).isPresent();
 
 	    resultEmail.put("resultEmail", exists ? "사용불가" : "사용가능");
 	    return resultEmail;
 	}
-	
+	// memberid로 displayName 가져오기
 	@GetMapping("/getDisplayNameByMemberId") @ResponseBody
 	public String getDisplayNameByMemberId(@RequestParam String memberId) {
 	    return service.selectdisplayNameByMemberId(memberId);
 	}
+	// memberid로 email 가져오기
+	@GetMapping("/getEmailByMemberId") @ResponseBody
+	public String getEmailByMemberId(@RequestParam String memberId) {
+		return service.selectEmailByMemberId(memberId);
+	}
+	// memberid로 address* 가져오기
+	@GetMapping("/getAddressPostByMemberId") @ResponseBody
+	public String getAddressPostByMemberId(@RequestParam String memberId) {
+		return service.selectAddressPostByMemberId(memberId);
+	}
+	@GetMapping("/getAddressRoadByMemberId") @ResponseBody
+	public String getAddressRoadByMemberId(@RequestParam String memberId) {
+		return service.selectAddressRoadByMemberId(memberId);
+	}
+	@GetMapping("/getAddressJibunByMemberId") @ResponseBody
+	public String getAddressJinunByMemberId(@RequestParam String memberId) {
+		return service.selectAddressJibunByMemberId(memberId);
+	}
+	@GetMapping("/getAddressDetailByMemberId") @ResponseBody
+	public String getAddressDetailByMemberId(@RequestParam String memberId) {
+		return service.selectAddressDetailByMemberId(memberId);
+	}
+	
 }

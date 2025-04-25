@@ -9,6 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface MemberRepository  extends JpaRepository<Member, Long>{
 	
+	@Query("select m from Member m where m.id=:id")
+	Optional<Member> findById(Long id);
+	
 	@Modifying  
 	@Transactional  
 	@Query("update Member m set m.memberPass=:password where m.memberPass=:old  and m.id=:id")
@@ -35,6 +38,12 @@ public interface MemberRepository  extends JpaRepository<Member, Long>{
 	
 	@Query("select m from Member m where m.email=:email")
 	Optional<Member> findByEmail(String email);	
+	
+	@Query("select m.id from Member m where m.memberId=:memberId")
+	Long findIdByMemberId(String memberId);
+	
+	@Modifying @Transactional @Query("update Member m set m.memberPass=:newpassword where m.id=:id and m.memberPass=:oldpassword")
+	void updatePasswordInMypage(String newpassword, Long id, String oldpassword);
 		
 }
 

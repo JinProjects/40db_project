@@ -34,6 +34,7 @@ public class SecurityConfig {
 		).formLogin(  // 1-2. form 만든폼 - login
 			(formLogin)-> 	formLogin
 								.loginPage("/member/login")
+								.loginProcessingUrl("/member/login")
 								.usernameParameter("memberId")
 								.passwordParameter("memberPass")
 								.defaultSuccessUrl("/member/mypage/main")
