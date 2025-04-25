@@ -20,6 +20,7 @@ public class BookHopeController {
 	private final BookHopeService bookHopeService;
 	@Autowired BookHopeApi bookHopeApi;
 	
+	
 	// 희망도서 검색 첫페이지
 	@GetMapping("/hopeBook/hope_search")
 	public String hope_now(Model model) {
