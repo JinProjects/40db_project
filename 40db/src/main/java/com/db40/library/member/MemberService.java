@@ -5,6 +5,8 @@ import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,6 @@ import lombok.RequiredArgsConstructor;
 @Service  //##1
 @RequiredArgsConstructor
 public class MemberService {
-	
-	
 	
 	private final MemberRepository   memberRepository;
 	private final PasswordEncoder    passwordEncoder;  // SecurityConfig
@@ -29,6 +29,7 @@ public class MemberService {
 		} catch (UnknownHostException e) { e.printStackTrace();}
 		return memberRepository.save(member);
 	}
+	
 	// 실명과 휴대폰 번호로 id찾기
 	public Long forFindId(String name, String mobile) {
 		Long findid = memberRepository.findIdByRealNameAndMobile(name, mobile);
@@ -44,6 +45,31 @@ public class MemberService {
 		pass = passwordEncoder.encode(pass);
 		memberRepository.updatePasswordById(id, pass);
 	}
+	// memberID로 id 찾기
+	public Long findIDByMemberId(String memberId) {
+		Long id = memberRepository.findIdByMemberId(memberId);
+		return id;
+	}
+	// 마이페이지에서 비밀번호 변경
+	@Transactional
+	public void updatePasswordInMypage(String newpassword, Long id, String oldpassword) {
+	    System.out.println("가져온 정보 : " + newpassword + ", " + id + ", " + oldpassword);
+	    
+	    Optional<Member> find = memberRepository.findById(id);
+	    
+	    if (find.isEmpty()) {
+	        throw new IllegalArgumentException("회원 정보를 찾을 수 없습니다."); }
+
+	    Member member = find.get();
+	    
+	    if (!passwordEncoder.matches(oldpassword, member.getMemberPass())) {
+	        throw new IllegalArgumentException("비밀번호 불일치"); }
+	    
+	    String encodedNewPassword = passwordEncoder.encode(newpassword);
+	    member.setMemberPass(encodedNewPassword);
+	    memberRepository.save(member);
+	}
+
 	
 	//selectAll
 	public List<Member> selectMemberAll(){  
@@ -72,4 +98,38 @@ public class MemberService {
 		memberRepository.delete(find);
 	}
 	
+	
+	// 중복체크
+	// 아이디
+	public Member selectUserMemberId(String memberId) {
+		return memberRepository.findByMemberId(memberId).get();
+	}
+	
+	// 이메일
+	public Member selectUserEmail(String email) {
+		return memberRepository.findByEmail(email).get();
+	}
+	
+	// displayName 가져오기 
+	public String selectdisplayNameByMemberId(String memberId) {
+		return memberRepository.findByMemberId(memberId).map(Member::getDisplayName).orElse("");
+	}
+	
+	// Email 가져오기 
+	public String selectEmailByMemberId(String memberId) {
+		return memberRepository.findByMemberId(memberId).map(Member::getEmail).orElse("");
+	}
+	// address 가져오기 
+	public String selectAddressPostByMemberId(String memberId) {
+		return memberRepository.findByMemberId(memberId).map(Member::getAddressPost).orElse("");
+	}
+	public String selectAddressRoadByMemberId(String memberId) {
+		return memberRepository.findByMemberId(memberId).map(Member::getAddressRoad).orElse("");
+	}
+	public String selectAddressJibunByMemberId(String memberId) {
+		return memberRepository.findByMemberId(memberId).map(Member::getAddressJibun).orElse("");
+	}
+	public String selectAddressDetailByMemberId(String memberId) {
+		return memberRepository.findByMemberId(memberId).map(Member::getAddressDetail).orElse("");
+	}
 }

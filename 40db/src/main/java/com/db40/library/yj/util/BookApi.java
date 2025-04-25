@@ -18,14 +18,14 @@ import org.springframework.stereotype.Component;
 
 import com.db40.library.sh.Books;
 import com.db40.library.sh.Category;
-import com.db40.library.yj.BooksRepository;
+import com.db40.library.yj.AdminBooksRepository;
 import com.db40.library.yj.CategoryRepository;
 import com.db40.library.yj.CategoryService;
 import com.fasterxml.jackson.core.JsonFactory;
 @Component
 public class BookApi{
 	@Autowired
-	BooksRepository booksRepository;
+	AdminBooksRepository booksRepository;
 	@Autowired
 	CategoryRepository categoryRepository;
 	

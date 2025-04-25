@@ -8,7 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface MemberRepository  extends JpaRepository<Member, Long>{
-	Optional<Member>	  findByMemberId(String memberId);
+	
+	@Query("select m from Member m where m.id=:id")
+	Optional<Member> findById(Long id);
 	
 	@Modifying  
 	@Transactional  
@@ -26,6 +28,22 @@ public interface MemberRepository  extends JpaRepository<Member, Long>{
 	@Modifying @Transactional
 	@Query("update Member m set m.memberPass=:pass where m.id=:id")
 	void updatePasswordById(Long id, String pass);
+	
+	/* api를 활용한 이메일 중복 시 바로 로그인 */
+	@Query("select m from Member m where m.email=:email")
+	int finyIdbyEmail(String email);
+	
+	@Query("select m from Member m where m.memberId=:memberId")
+	Optional<Member> findByMemberId(String memberId);	
+	
+	@Query("select m from Member m where m.email=:email")
+	Optional<Member> findByEmail(String email);	
+	
+	@Query("select m.id from Member m where m.memberId=:memberId")
+	Long findIdByMemberId(String memberId);
+	
+	@Modifying @Transactional @Query("update Member m set m.memberPass=:newpassword where m.id=:id and m.memberPass=:oldpassword")
+	void updatePasswordInMypage(String newpassword, Long id, String oldpassword);
 		
 }
 

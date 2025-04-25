@@ -19,8 +19,8 @@ import com.db40.library.member.MemberStatus;
 import com.db40.library.member.MemberStatusRepository;
 import com.db40.library.sh.Books;
 import com.db40.library.sh.Category;
-import com.db40.library.yj.BooksRepository;
-import com.db40.library.yj.BooksService;
+import com.db40.library.yj.AdminBooksRepository;
+import com.db40.library.yj.AdminBooksService;
 import com.db40.library.yj.CategoryRepository;
 
 @Controller
@@ -31,9 +31,9 @@ public class AdminController {
 	@Autowired
 	MemberStatusRepository memberStatusRepository;
 	@Autowired
-	BooksService booksService;
+	AdminBooksService booksService;
 	@Autowired
-	BooksRepository booksRepository;
+	AdminBooksRepository booksRepository;
 	@Autowired
 	CategoryRepository categoryRepository;
 	

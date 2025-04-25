@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.db40.library.yj.util.BookApi;
 
 @Controller
-public class BooksController {
+public class AdminBooksController {
 	@Autowired
 	public BookApi bookApi;
 	
 	@Autowired
-	public BooksRepository bookRepository;
+	public AdminBooksRepository bookRepository;
 	
 	@GetMapping("/admin/main")
 	public String test(Model model) {

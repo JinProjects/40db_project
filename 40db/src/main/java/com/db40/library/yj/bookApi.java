@@ -6,6 +6,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import com.db40.library.sh.Books;
+import com.db40.library.sh.Category;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
@@ -71,7 +72,7 @@ public class bookApi {
 	                        System.out.println("author :: " + author);
 	                    } else if ("description".equals(fieldName)) {
 	                        String bookIntro = parser.getValueAsString();
-	                        book.setBookDescription(bookIntro);
+	                        //book.setBookDescription(bookIntro);
 	                        System.out.println("bookIntro :: " + bookIntro);
 	                    }else if ("isbn".equals(fieldName) || "isbn13".equals(fieldName)) {
 	                        String isbn = parser.getValueAsString();

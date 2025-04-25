@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 import com.db40.library.sh.Books;
 
 @Service
-public class BooksService {
+public class AdminBooksService {
 	@Autowired
-	BooksRepository booksRepository;
+	AdminBooksRepository booksRepository;
 	
 	public void insert(Books books) {
 	//	books.setCategory( //카테고리에 값이 존재하야 에러 안남
