@@ -1,8 +1,6 @@
 package com.db40.library.binary3300;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,17 +9,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import com.db40.library.member.Member;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-@Entity @Getter @Setter
+@Entity @Getter @Setter   @ToString(exclude = "member")
 public class BookHope {
 	@Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long book_hope_no;
+	@Column(name = "book_hope_no")
+	private Long bookHopeNo;
+
 	
 	private String book_title;
 	
@@ -29,9 +29,9 @@ public class BookHope {
 	
 	private String book_auther;
 	
-	private String book_publisher;
+	private String book_publisher; //출판사 
 	
-	private String book_published_date;
+	private String book_published_date; //출판일 
 	
 	@Column(columnDefinition = "text")
 	private String book_reason;

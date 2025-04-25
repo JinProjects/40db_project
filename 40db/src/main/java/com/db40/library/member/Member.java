@@ -1,14 +1,20 @@
 package com.db40.library.member;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.db40.library.binary3300.BookHope;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +26,9 @@ public class Member {
 	private Long id;
 	
 	// 계정 정보
-	@Column(unique=true, name="member_id", nullable=false) private String memberId; // 아이디
+	@Column(unique=true, name="member_id", nullable=false) 
+	@JoinColumn(name = "")
+	private String memberId; // 아이디
 	@Column(name="member_pass", nullable=false) private String memberPass; 			// 비밀번호
 	
 	// 사용자 정보
@@ -46,4 +54,11 @@ public class Member {
 	// 계정 상태
 	@ManyToOne @JoinColumn(name="member_status", nullable=false) private MemberStatus memberStatus;
 	
+<<<<<<< HEAD
+=======
+	@OneToMany(mappedBy = "member"  , fetch = FetchType.EAGER)
+	private List<BookHope> bookHope = new ArrayList<>();
+	
+
+>>>>>>> 8dc0c2d85da9096f033f95e53468ff113d531b83
 }

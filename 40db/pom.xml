@@ -102,6 +102,7 @@
 			  <artifactId>jsoup</artifactId>
 			  <version>1.17.2</version>
 			</dependency>
+<<<<<<< HEAD
 			<!-- json parsing -->
 			<dependency>
 			    <groupId>com.googlecode.json-simple</groupId>
@@ -114,6 +115,9 @@
 		      <artifactId>openai-java</artifactId>
 		      <version>0.31.0</version>
 	  		</dependency>
+=======
+
+>>>>>>> 8dc0c2d85da9096f033f95e53468ff113d531b83
 	      <!-- 추가  -->
 	      <!-- 추가  -->   
 		<!-- 추가 -->
