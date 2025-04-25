@@ -19,7 +19,9 @@ import lombok.ToString;
 @Entity @Getter @Setter   @ToString(exclude = "member")
 public class BookHope {
 	@Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long book_hope_no;
+	@Column(name = "book_hope_no")
+	private Long bookHopeNo;
+
 	
 	private String book_title;
 	

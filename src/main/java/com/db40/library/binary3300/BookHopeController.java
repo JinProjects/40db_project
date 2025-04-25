@@ -74,12 +74,23 @@ public class BookHopeController {
     	
     }   */
 	
-	//1. 전체 리스트 읽어오기 
+	//전체 리스트 가져오기+페이징. 망할까봐 밑에 백업
 	@GetMapping("/hopeBook/hope_list")
-	public String list(Model model){
-		model.addAttribute("list" , bookHopeService.findAll());  //##전체리스트뽑고
+	public String list(Model model, @RequestParam(value="page", defaultValue = "0") int page ){
+		//model.addAttribute("list" , bookHopeService.findAllByOrderByDesc());  //##전체리스트뽑고
+		model.addAttribute("list",bookHopeService.getPaging(page).getContent()); 
+		model.addAttribute("paging",new PagingDto(bookHopeService.findAll().size(),page)); 
+		
 		return "hopeBook/hope_list"; 
-	} 
+	}
+	
+	
+	//1. 전체 리스트 읽어오기 
+//	@GetMapping("/hopeBook/hope_list")
+//	public String list(Model model){
+//		model.addAttribute("list" , bookHopeService.findAllByOrderByDesc());  //##전체리스트뽑고
+//		return "hopeBook/hope_list"; 
+//	} 
 	 
 	//2. 사용자, 희망도서를 api로 받은 정보를 write로 보내는 기능
 		@PostMapping("/hopeBook/hope_write")
