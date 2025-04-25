@@ -12,17 +12,17 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class MemberController {
+public class Member2Controller {
 	
-	private final MemberService memberService;
+	private final MemberService2 memberService;
 	
 	@GetMapping("/signup")
-	public String signup(MemberCreateForm memberCreateForm) {
+	public String signup(Member2CreateForm memberCreateForm) {
 		return "signup_form";
 	}
 	
     @PostMapping("/signup")
-    public String signup(@Valid MemberCreateForm memberCreateForm, BindingResult bindingResult) {
+    public String signup(@Valid Member2CreateForm memberCreateForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "signup_form";
         }

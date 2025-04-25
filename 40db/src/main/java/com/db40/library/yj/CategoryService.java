@@ -8,7 +8,7 @@ import com.db40.library.sh.Category;
 @Service
 public class CategoryService {
 	@Autowired
-	BooksRepository booksRepository;
+	AdminBooksRepository booksRepository;
 	@Autowired
 	CategoryRepository categoryRepository;
 	

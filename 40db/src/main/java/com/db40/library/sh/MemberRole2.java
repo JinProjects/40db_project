@@ -3,12 +3,12 @@ package com.db40.library.sh;
 import lombok.Getter;
 
 @Getter
-public enum MemberRole {
+public enum MemberRole2 {
 	
     ADMIN("ROLE_ADMIN"),
     MEMBER("ROLE_MEMBER");
 
-    MemberRole(String value) {
+    MemberRole2(String value) {
         this.value = value;
     }
 

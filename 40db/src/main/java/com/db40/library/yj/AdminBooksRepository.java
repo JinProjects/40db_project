@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.db40.library.sh.Books;
 
-public interface BooksRepository extends JpaRepository<Books, Long>{
+public interface AdminBooksRepository extends JpaRepository<Books, Long>{
 	@Query("select count(b) from Books b where book_isbn = :isbn")
 	public int findByIsbn(String isbn); 
 	

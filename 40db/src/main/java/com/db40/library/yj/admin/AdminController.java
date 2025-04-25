@@ -19,9 +19,10 @@ import com.db40.library.member.MemberStatus;
 import com.db40.library.member.MemberStatusRepository;
 import com.db40.library.sh.Books;
 import com.db40.library.sh.Category;
-import com.db40.library.yj.BooksRepository;
-import com.db40.library.yj.BooksService;
+import com.db40.library.yj.AdminBooksRepository;
+import com.db40.library.yj.AdminBooksService;
 import com.db40.library.yj.CategoryRepository;
+import com.db40.library.yj.util.ChatGPTService;
 
 @Controller
 public class AdminController {
@@ -31,11 +32,13 @@ public class AdminController {
 	@Autowired
 	MemberStatusRepository memberStatusRepository;
 	@Autowired
-	BooksService booksService;
+	AdminBooksService booksService;
 	@Autowired
-	BooksRepository booksRepository;
+	AdminBooksRepository booksRepository;
 	@Autowired
 	CategoryRepository categoryRepository;
+	@Autowired
+	ChatGPTService chatGPTService;
 	
 	@GetMapping("/admin/membersManage")
 	public String membersManage(Model model) {
@@ -136,5 +139,12 @@ public class AdminController {
 //		
 //		return ResponseEntity.ok(Map.of("status","success"));
 //	}
+	//--------------------------------------------
 	
+	
+	@GetMapping(value="/admin/gptHashTag",produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String gptHashTag(@RequestBody String content) {
+		return chatGPTService.getAPIReponse(content);
+	}
 }

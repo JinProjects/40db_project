@@ -12,13 +12,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException; // UsernameNotFoundException 사용
 import org.springframework.stereotype.Service;
 
+import com.db40.library.member.Member;
+
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
 public class MemberSecurityService implements UserDetailsService {
 
-    private final MemberRepository memberRepository;
+    private final Member2Repository memberRepository;
 
     @Override
     public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
@@ -30,11 +32,11 @@ public class MemberSecurityService implements UserDetailsService {
             Member _member = member.get();
             List<GrantedAuthority> authorities = new ArrayList<>();
             if ("admin".equals(_member.getMemberId())) {
-                authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getValue()));
+                authorities.add(new SimpleGrantedAuthority(MemberRole2.ADMIN.getValue()));
             } else {
-                authorities.add(new SimpleGrantedAuthority(MemberRole.MEMBER.getValue()));
+                authorities.add(new SimpleGrantedAuthority(MemberRole2.MEMBER.getValue()));
             }
-            return new User(_member.getMemberId(), _member.getPassword(), authorities);
+            return new User(_member.getMemberId(), _member.getMemberPass(), authorities);
         } catch (Exception e) {
             // 예외 발생 시 로그 출력
             e.printStackTrace();

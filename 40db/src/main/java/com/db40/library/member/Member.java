@@ -26,9 +26,9 @@ public class Member {
 	private Long id;
 	
 	// 계정 정보
+	//@OneToMany(mappedBy = "memberId")
 	@Column(unique=true, name="member_id", nullable=false) 
-	@JoinColumn(name = "")
-	private String memberId; // 아이디
+	String memberId; // 아이디
 	@Column(name="member_pass", nullable=false) private String memberPass; 			// 비밀번호
 	
 	// 사용자 정보
@@ -54,11 +54,8 @@ public class Member {
 	// 계정 상태
 	@ManyToOne @JoinColumn(name="member_status", nullable=false) private MemberStatus memberStatus;
 	
-<<<<<<< HEAD
-=======
 	@OneToMany(mappedBy = "member"  , fetch = FetchType.EAGER)
 	private List<BookHope> bookHope = new ArrayList<>();
 	
-
->>>>>>> 8dc0c2d85da9096f033f95e53468ff113d531b83
+	
 }
