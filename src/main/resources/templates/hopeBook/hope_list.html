@@ -50,8 +50,8 @@
 							<ul class="pagination  justify-content-center">
 								<!-- # -->
 								<!-- 이전 -->
-								<li class="page-item" th:if="${paging.current > 1}">
-									<a class="page-link" th:href="@{/hopeBook/hope_list(page=${paging.start-1})}"><span>이전</span></a>
+								<li class="page-item" th:if="${ paging.start  >=   paging.bottomlist }">
+									<a class="page-link" th:href="@{/hopeBook/hope_list(page=${paging.start-2})}"><span>이전</span></a>
 										
 								</li>
 
@@ -64,8 +64,8 @@
 								</li>
 
 								<!-- 다음 -->
-								<li class="page-item" th:if="${paging.current < paging.pagetotal}">
-									<a class="page-link" th:href="@{/hopeBook/hope_list(page=${paging.current+1})}"><span>다음</span></a>
+								<li class="page-item" th:if="${paging.pagetotal >   paging.end}">
+									<a class="page-link" th:href="@{/hopeBook/hope_list(page=${paging.end})}"><span>다음</span></a>
 										
 								</li>
 							</ul>
