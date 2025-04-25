@@ -1,19 +1,21 @@
 package com.db40.library.sh;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.db40.library.yj.admin.Hashtag;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -61,7 +63,11 @@ public class Books {
 	    @Column(name = "book_hit")
 	    @ColumnDefault("0")
 	    private Integer bookHit;
-
+	    
+	    @OneToMany
+	    @JoinColumn(name = "book_no")
+	    private List<Hashtag> hashtag; 
+	    
 		@Override
 		public String toString() {
 			return "Books [bookNo=" + bookNo + ", bookIsbn=" + bookIsbn + ", bookDescription=" + bookDescription
