@@ -4,8 +4,7 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,13 +21,19 @@ public class InOutController {
 	private final MemberRepository memberRepository;
 	private final BooksRepository booksRepository;
 	
+	@GetMapping("/alllist")
+	public String allList (Model model) {
+		List<InOut> allList = inOutRepository.findAll();
+		InOutComparator inOutComparator = new InOutComparator(); // Comparator 객체 생성
+		allList.sort(inOutComparator);
+		model.addAttribute("allList", allList);
+		return "inout_admin";
+	}
+	
 	@PostMapping("/borrow")
 	public String borrow (@RequestParam("bookNo") Integer bookNo,
 	                      @RequestParam("bookTitle") String bookTitle, 
 	                      Principal principal) {
-
-	    System.out.println("전달받은 책 번호: " + bookNo);
-	    System.out.println("전달받은 책 제목: " + bookTitle); 
 
 	    Member member = memberRepository.findByMemberId(principal.getName()).orElse(null);
 	    if (member == null) {
@@ -51,9 +56,9 @@ public class InOutController {
 
 	    inout.setBorrowState("대출 중");
 	    inOutRepository.save(inout);
-	    return "redirect:/inout_user";
+	    return "redirect:/inoutUser";
 	}
-	@GetMapping("/inout_user")
+	@GetMapping("/inoutUser")
 	public String userBorrowList(Model model, Principal principal) {
 	    // 현재 로그인한 사용자의 대출 목록을 가져오는 로직 추가
 	    // 예시:
@@ -103,6 +108,6 @@ public class InOutController {
 
 	   
 	}
-	    return "redirect:/inout_user";
+	    return "redirect:/inoutUser";
 }
 }

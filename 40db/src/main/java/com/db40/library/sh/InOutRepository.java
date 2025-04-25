@@ -11,7 +11,7 @@ public interface InOutRepository extends JpaRepository<InOut, Long> {
 
 	List<InOut> findByMemberId(Member memberId);
 	List<InOut> findByBorrowState(String string);
-
+	
 
 	
 }
