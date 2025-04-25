@@ -14,11 +14,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class BorrowStateUpdateService {
-<<<<<<< HEAD
     private final BorrowRepository inoutRepository;
-=======
-    private final InOutRepository inoutRepository;
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 
     @Transactional
     @Scheduled(cron = "0 * * * * *") 
@@ -26,13 +22,8 @@ public class BorrowStateUpdateService {
         LocalDateTime now = LocalDateTime.now();
 
         // 1. "대출 중"인 책들 상태 업데이트
-<<<<<<< HEAD
         List<Borrow> borrowingBooks = inoutRepository.findByBorrowState("대출 중");
         for (Borrow inOut : borrowingBooks) {
-=======
-        List<InOut> borrowingBooks = inoutRepository.findByBorrowState("대출 중");
-        for (InOut inOut : borrowingBooks) {
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
             if (now.isAfter(inOut.getDueDate())) {
                 // 연체 시작: 상태 변경, remainDays 0, overdueDays 초기 계산
                 inOut.setBorrowState("연체");
@@ -50,13 +41,8 @@ public class BorrowStateUpdateService {
         }
 
         // 2. 이미 "연체" 상태인 책들 overdueDays 업데이트
-<<<<<<< HEAD
         List<Borrow> overdueBooks = inoutRepository.findByBorrowState("연체");
         for (Borrow inOut : overdueBooks) {
-=======
-        List<InOut> overdueBooks = inoutRepository.findByBorrowState("연체");
-        for (InOut inOut : overdueBooks) {
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
             long currentOverdueMinutes = ChronoUnit.MINUTES.between(inOut.getDueDate(), now);
             inOut.setOverdueDays(currentOverdueMinutes < 0 ? 0 : currentOverdueMinutes); 
             inoutRepository.save(inOut); // 연체 시간 업데이트 저장

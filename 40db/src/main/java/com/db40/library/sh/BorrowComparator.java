@@ -2,17 +2,10 @@ package com.db40.library.sh;
 
 import java.util.Comparator;
 
-<<<<<<< HEAD
 public class BorrowComparator implements Comparator<Borrow> {
 
     @Override
     public int compare(Borrow o1, Borrow o2) {
-=======
-public class InOutComparator implements Comparator<InOut> {
-
-    @Override
-    public int compare(InOut o1, InOut o2) {
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
         // 첫 번째 기준: borrowState가 "연체"인 경우를 먼저 오게 합니다.
         boolean isOverdue1 = "연체".equals(o1.getBorrowState());
         boolean isOverdue2 = "연체".equals(o2.getBorrowState());

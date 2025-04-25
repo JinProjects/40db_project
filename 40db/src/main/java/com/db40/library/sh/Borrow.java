@@ -1,10 +1,6 @@
 package com.db40.library.sh;
 
 import java.time.LocalDateTime;
-<<<<<<< HEAD
-=======
-import java.time.temporal.ChronoUnit;
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +19,6 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-<<<<<<< HEAD
 public class Borrow {
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
@@ -36,20 +31,6 @@ public class Borrow {
 	@ManyToOne
 	@JoinColumn  (name = "book_no")
 	private Books book;
-=======
-public class InOut {
-	@Id
-	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	private long borrowNo;
-	
-	@ManyToOne
-	@JoinColumn  (name = "member_id")
-	private Member memberId;
-	
-	@ManyToOne
-	@JoinColumn  (name = "book_no")
-	private Books bookNo;
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 	
 	@Column (name = "book_title")
 	private String bookTitle;

@@ -1,4 +1,4 @@
-package com.db40.library.sh;
+package com.db40.library;
 
 
 import org.springframework.boot.SpringApplication;

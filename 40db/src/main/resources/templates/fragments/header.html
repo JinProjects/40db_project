@@ -28,18 +28,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<li class="nav-item" sec:authorize="isAnonymous()">
 				  <a class="nav-link text-dark" th:href="@{/member/login}" >회원가입</a>
 				</li>
-<<<<<<< HEAD
 					
 				
-=======
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 				 <li class="nav-item">
 				 <a class="nav-link text-dark memberId d-none hidden" sec:authorize="isAuthenticated()"  sec:authentication="principal.username" id="memberId"></a>
 				 </li>
 				  <li class="nav-item" sec:authorize="isAuthenticated()">
 				    <a class="nav-link text-primary displayName" th:href="@{/member/mypage/}" id="displayName">MYPAGE</a>
 				  </li>
-<<<<<<< HEAD
 				 <li class="nav-item" sec:authorize="isAuthenticated()">
 				    <a class="nav-link text-danger" th:href="@{/member/logout}">로그아웃</a>
 				  </li>
@@ -48,14 +44,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		      <li class="nav-item">
 		        <a class="nav-link text-dark disabled" href="#">대시보드</a>
 		      </li>
-=======
-				   <li class="nav-item">
-		        	<a class="nav-link text-dark disabled" href="/admin/dashBoard" sec:authorize="isAuthenticated()">대시보드</a>
-		        	</li>
-				 <li class="nav-item" sec:authorize="isAuthenticated()">
-				    <a class="nav-link text-danger" th:href="@{/member/logout}">로그아웃</a>
-				  </li>
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 	    </ul>
 	  </div>
 	</nav>
@@ -92,17 +80,5 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
      });
 </script>
 </th:block>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-		<script> 
-		    let msg = "[[${msg}]]";   
-		    //오류나면 주석지우기    Thymeleaf 데이터 바이딩- 서버에서 js 코드 전달
-		    if( msg == 'fail'){ history.go(-1); alert("정보를 확인해주세요.");}
-			else if(msg.length != 0){ alert( msg ); }
-		</script>
-=======
->>>>>>> ef0bfea5b5bfc1a53a2a5275d2ea888c105d56dc
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 </body>
 </html>

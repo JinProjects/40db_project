@@ -11,15 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-<<<<<<< HEAD
 import com.db40.library.member.*;
-=======
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-<<<<<<< HEAD
 public class BorrowController {
 	
 	private final BorrowRepository inOutRepository;
@@ -33,21 +29,6 @@ public class BorrowController {
 		allList.sort(inOutComparator);
 		model.addAttribute("allList", allList);
 		return "borrow/inout_admin";
-=======
-public class InOutController {
-	
-	private final InOutRepository inOutRepository;
-	private final MemberRepository memberRepository;
-	private final BooksRepository booksRepository;
-	
-	@GetMapping("/alllist")
-	public String allList (Model model) {
-		List<InOut> allList = inOutRepository.findAll();
-		InOutComparator inOutComparator = new InOutComparator(); // Comparator 객체 생성
-		allList.sort(inOutComparator);
-		model.addAttribute("allList", allList);
-		return "inout_admin";
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 	}
 	
 	@PostMapping("/borrow")
@@ -57,12 +38,8 @@ public class InOutController {
 
 	    Member member = memberRepository.findByMemberId(principal.getName()).orElse(null);
 	    if (member == null) {
-<<<<<<< HEAD
 			/* return "redirect:/member/login?error"; */
 	        return "redirect:/member/login";
-=======
-	        return "redirect:/login?error";
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 	    }
 	    Books books = booksRepository.findByBookNo(bookNo);
 	    if (books == null) {
@@ -71,15 +48,9 @@ public class InOutController {
 	    }
 
 
-<<<<<<< HEAD
 	    Borrow inout = new Borrow();
 	    inout.setMember(member);
 	    inout.setBook(books); 
-=======
-	    InOut inout = new InOut();
-	    inout.setMemberId(member);
-	    inout.setBookNo(books); 
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 
 
 	    inout.setBookTitle(books.getBookTitle());
@@ -89,17 +60,12 @@ public class InOutController {
 	    inOutRepository.save(inout);
 	    return "redirect:/inoutUser";
 	}
-<<<<<<< HEAD
 	@GetMapping("/borrow/inoutUser")
-=======
-	@GetMapping("/inoutUser")
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 	public String userBorrowList(Model model, Principal principal) {
 	    // 현재 로그인한 사용자의 대출 목록을 가져오는 로직 추가
 	    // 예시:
 	    Member member = memberRepository.findByMemberId(principal.getName()).orElse(null);
 	    if (member != null) {
-<<<<<<< HEAD
 	    List<Borrow> borrowList = inOutRepository.findByMemberId(member); // InOutRepository에 메소드 추가 필요
 	    model.addAttribute("borrowList", borrowList);
 	     }
@@ -118,26 +84,6 @@ public class InOutController {
 	    Borrow targetInout = null;
 	    for (Borrow inout : userBorrows) {
 	        if (inout.getBook() != null && inout.getBook().getBookNo() == bookId && inout.getReturnDate() == null) {
-=======
-	    List<InOut> borrowList = inOutRepository.findByMemberId(member); // InOutRepository에 메소드 추가 필요
-	    model.addAttribute("borrowList", borrowList);
-	     }
-	    return "inout_user"; 
-	}
-	
-	@PostMapping("/bookReturn")
-	public String bookreturn (@RequestParam("bookNo") Integer bookId, Principal principal) {
-
-	    Member member = memberRepository.findByMemberId(principal.getName()).orElse(null);
-	    if (member == null) {
-	        return "redirect:/login";
-	    }
-
-	    List<InOut> userBorrows = inOutRepository.findByMemberId(member);
-	    InOut targetInout = null;
-	    for (InOut inout : userBorrows) {
-	        if (inout.getBookNo() != null && inout.getBookNo().getBookNo() == bookId && inout.getReturnDate() == null) {
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 	            targetInout = inout;
 	            break;
 	        }

@@ -1,8 +1,6 @@
 package com.db40.library.binary3300;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-<<<<<<< HEAD
-=======
-import javax.persistence.OneToMany;
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 
 import com.db40.library.member.Member;
 

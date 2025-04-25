@@ -21,7 +21,6 @@ import com.db40.library.sh.Category;
 import com.db40.library.yj.AdminBooksRepository;
 import com.db40.library.yj.CategoryRepository;
 import com.db40.library.yj.CategoryService;
-import com.fasterxml.jackson.core.JsonFactory;
 @Component
 public class BookApi{
 	@Autowired

@@ -221,7 +221,6 @@ public class MemberController {
 	public String mypageMain() {  return "member/mypage/recentBorrow"; }
 	
 	@GetMapping("/member/mypage/upass")
-<<<<<<< HEAD
 	public String mypageUpdatePassword() {
 		 return "member/mypage/updatePassword";
 	}
@@ -242,15 +241,6 @@ public class MemberController {
 	
 	/* 마이페이지 */
 	
-=======
-	public String mypageUpw() {
-	    return "member/mypage/updatePassword"; }
-	
-//	@PostMapping("/member/mypage/upass")
-//	public String updatePasswordInMypage() {
-//		
-//	}
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 	
 	// 중복체크
 	// 아이디
@@ -270,25 +260,16 @@ public class MemberController {
 	public Map<String, Object> reduplicationEmailCheck(@PathVariable String email) {
 	    Map<String, Object> resultEmail = new HashMap<>();
 	    
-<<<<<<< HEAD
 	    boolean exists = mR.findByEmail(email).isPresent();
-=======
-	    boolean exists = mR.findByEmail(email).isPresent(); // true = 이미 존재
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 
 	    resultEmail.put("resultEmail", exists ? "사용불가" : "사용가능");
 	    return resultEmail;
 	}
-<<<<<<< HEAD
 	// memberid로 displayName 가져오기
-=======
-	
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 	@GetMapping("/getDisplayNameByMemberId") @ResponseBody
 	public String getDisplayNameByMemberId(@RequestParam String memberId) {
 	    return service.selectdisplayNameByMemberId(memberId);
 	}
-<<<<<<< HEAD
 	// memberid로 email 가져오기
 	@GetMapping("/getEmailByMemberId") @ResponseBody
 	public String getEmailByMemberId(@RequestParam String memberId) {
@@ -312,6 +293,4 @@ public class MemberController {
 		return service.selectAddressDetailByMemberId(memberId);
 	}
 	
-=======
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 }

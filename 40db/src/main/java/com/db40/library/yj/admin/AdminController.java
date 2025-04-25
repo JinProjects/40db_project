@@ -22,7 +22,6 @@ import com.db40.library.sh.Category;
 import com.db40.library.yj.AdminBooksRepository;
 import com.db40.library.yj.AdminBooksService;
 import com.db40.library.yj.CategoryRepository;
-import com.db40.library.yj.util.ChatGPTService;
 
 @Controller
 public class AdminController {
@@ -38,7 +37,7 @@ public class AdminController {
 	@Autowired
 	CategoryRepository categoryRepository;
 	@Autowired
-	ChatGPTService chatGPTService;
+	//ChatGPTService chatGPTService;
 	
 	@GetMapping("/admin/membersManage")
 	public String membersManage(Model model) {
@@ -145,6 +144,7 @@ public class AdminController {
 	@GetMapping(value="/admin/gptHashTag",produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String gptHashTag(@RequestBody String content) {
-		return chatGPTService.getAPIReponse(content);
+//		 return chatGPTService.getAPIReponse(content);
+		 return "";
 	}
 }

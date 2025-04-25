@@ -5,12 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>40db wish list</title>
-<<<<<<< HEAD
-=======
-<!-- CKEditor 로드 -->
-<script src="//cdn.ckeditor.com/4.25.1/standard/ckeditor.js"></script> 
-
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 <!-- Latest compiled and minified CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -33,13 +27,8 @@
     <thead>
       <tr >
         <th>번호</th>
-<<<<<<< HEAD
         <th>제목</th>
 		<th>저자</th> 
-=======
-        <th>제목</th> 
-        <th>저자</th> 
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
         <th>출판사</th> 
         <th>ISBN</th> 
         <th>출간일</th> 
@@ -48,7 +37,6 @@
     <tbody>
     </tbody>
   </table>
-<<<<<<< HEAD
   <form th:action="@{/hopeBook/hope_write}"  method="post"  id="hope_form">
   <input type="hidden"  name="title" id="title">
   <input type="hidden"  name="author" id="author">
@@ -60,10 +48,6 @@
 			let userfind;
 			$(function(){
 				let bookData = [];
-=======
-		<script th:inline="javascript">
-			$(function(){
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 					ajax_api('책제목검색');
 					//$(".book_result").hide();
 					$("#search").on("keyup", function(){
@@ -85,7 +69,6 @@
 					success:function(json){ 
 						$(".hope_user_search tbody").empty();
 						if( json && json.item && json.item.length>0 ){
-<<<<<<< HEAD
 							bookData = json.item;
 							//console.log(bookData);
 							for(let i=0; i<bookData.length; i++){
@@ -102,22 +85,6 @@
 									<tr>
 										<td>${i+1}</td>
 										<td onClick='ajax_hope_write(${i})'>${title}</td>
-=======
-						console.log("json:"+json);
-							let item = json.item;
-							for(let i=0; i<item.length; i++){
-								//1. 데이터 가벼오기
-								let title=item[i].title;
-								let author=item[i].author;
-								let publisher=item[i].publisher;
-								let isbn13=item[i].isbn13;
-								let pubdate=item[i].pubDate;
-								//2. tbody 행 추가 템플릿 리터럴
-								let row = `
-									<tr>
-										<td></td>
-										<td><a href="/hopeBook/write?title=${encodeURIComponent(title)}&author=${encodeURIComponent(author)}&publisher=${encodeURIComponent(publisher)}&isbn13=${encodeURIComponent(isbn13)}">${title}</a></td>
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 										<td>${author}</td>
 										<td>${publisher}</td>
 										<td>${isbn13}</td>
@@ -133,7 +100,6 @@
 					//}
 				});
 			}
-<<<<<<< HEAD
 
 			function ajax_hope_write(index){    //    
 				console.log('클릭');
@@ -150,12 +116,6 @@
 			
 		</script>
 
-=======
-			
-		</script>
-</form>
-</div>
->>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 </div>
 </body>
 </html>
