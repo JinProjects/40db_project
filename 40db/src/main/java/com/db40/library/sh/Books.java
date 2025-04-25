@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+<<<<<<< HEAD
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -16,6 +17,12 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.db40.library.yj.admin.Hashtag;
+=======
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+>>>>>>> f26081a05c14ba7170d255de46b61cdf2126b814
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +36,7 @@ public class Books {
 	    @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    @Column(name = "book_no")
-	    private Long bookNo;
+	    private Integer bookNo;
 
 	    @Column(name = "book_isbn", length = 100)
 	    private String bookIsbn;
@@ -56,14 +63,20 @@ public class Books {
 	    @Column(name = "book_pulished_date", length = 100)
 	    private String bookPublishedDate;
 
+<<<<<<< HEAD
 	    @Column(name = "book_entered_date", length = 100)
 	    @CreationTimestamp
+=======
+       @Column(name = "book_entered_date", length = 100)
+       @CreationTimestamp
+>>>>>>> f26081a05c14ba7170d255de46b61cdf2126b814
 	    private LocalDateTime bookEnteredDate;
 
 	    @Column(name = "book_hit")
 	    @ColumnDefault("0")
 	    private Integer bookHit;
 	    
+<<<<<<< HEAD
 	    @OneToMany
 	    @JoinColumn(name = "book_no")
 	    private List<Hashtag> hashtag; 
@@ -76,4 +89,8 @@ public class Books {
 					+ ", bookEnteredDate=" + bookEnteredDate + ", bookHit=" + bookHit + "]";
 		}
 	    
+=======
+	    @OneToMany (mappedBy = "bookNo")
+	    private List<InOut> inout;
+>>>>>>> f26081a05c14ba7170d255de46b61cdf2126b814
 	}
