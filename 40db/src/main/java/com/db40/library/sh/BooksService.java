@@ -20,11 +20,14 @@ public class BooksService {
 		return this.booksRepository.findAll(pageable);
 	}
 	
+<<<<<<< HEAD
 	public Page<Books> getSearch(int page, String keyword) {
 		Pageable pageable = PageRequest.of(page, 10);
 		return this.booksRepository.findByBookTitleContainingIgnoreCaseOrBookAuthorContainingIgnoreCaseOrBookPublisherContainingIgnoreCase(keyword, keyword, keyword, pageable);
 	}
 	
+=======
+>>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 	public Books getBooks (Integer bookNo) {
 		Optional<Books> books = this.booksRepository.findById(bookNo);
 			return books.get();

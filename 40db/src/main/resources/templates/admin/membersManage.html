@@ -19,20 +19,19 @@ layout:decorate="~{fragments/layout}">
 		let $btnMemberUpdate = $('.btnMemberUpdate');
 		let listStatus = $();
 		let memberId = '';
-		btnMemberUpdate.on('click', function(e){
+		$btnMemberUpdate.on('click', function(e){
 			let $clickedButton = $(this);
 			let $row = $clickedButton.closest('tr');
 			
-			
 			let $inputVal = $clickedButton.siblings('.memberId');
 			memberId = $inputVal[0].value;
+			
 			let $showStatus = $row.find('.showStatus');
 			let $updateStatus = $row.find('.updateStatus');
 			let $updateWrap = $row.find('.updateWrap');
 			let $MemberIdElement = $row.find('.memberId');
 			
 			console.log($showStatus);
-			
 			
 			/* let showStatus = $('.showStatus');
 			let updateStatus = $('.updateStatus');
@@ -41,7 +40,7 @@ layout:decorate="~{fragments/layout}">
 								<option value='1'>정상</option> 
 								<option value='2'>휴면계정</option> 
 								<option value='3'>영구정지</option>
-							</select>
+								</select>
 			`;
 			listStatus = $(listStatusHtml);
 			//let memberId = $('.memberId').eq(2).val();
@@ -52,7 +51,7 @@ layout:decorate="~{fragments/layout}">
 			//updateForm.append(btnUpdateDone);
 			
 			$showStatus.hide();
-			$btnMemberUpdate.hide();
+			$clickedButton.hide();
 			$updateWrap.empty().append(btnUpdateDone);
 			$updateStatus.empty().append(listStatus);
 			
@@ -74,13 +73,11 @@ layout:decorate="~{fragments/layout}">
 				hiddenForm.append(updateForm);
 				//updateForm.submit();
 			}) */
-			
-			
 		})
 		
 		$('.member-result tbody').on('click','.btnUpdateDone',function(){
 		     let $thisDoneButton = $(this); // 클릭된 '완료' 버튼
-	        let $row = $thisDoneButton.closest('tr'); // 해당 행 찾기
+	         let $row = $thisDoneButton.closest('tr'); // 해당 행 찾기
 	        
 				let listStatusVal = listStatus.val();
 				let memberIdVal = memberId;
@@ -97,9 +94,7 @@ layout:decorate="~{fragments/layout}">
 				updateForm.append(inputMemberId);
 				updateForm.append(inputMemberStatus);
 				hiddenForm.append(updateForm);
-				//updateForm.submit();
-				
-
+				updateForm.submit();
 			})
 	})
 	</script>

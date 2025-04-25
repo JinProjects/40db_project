@@ -140,23 +140,43 @@ body {
 				<!-- 사용자 ID -->
 
 				<div class="form-floating mb-3">
+<<<<<<< HEAD
 					<input type="text" name="memberId" id="memberId" class="form-control" placeholder="사용자ID">
 					<label for="memberId">사용자ID</label>
 					<span class="d-flex justify-content-end">
 					<a th:href="@{/member/findid}" 
 					class="d-inline-flex justify-content-end" 
 					style="font-size: 11px; text-decoration: none; color: gray;">아이디가 기억나지 않습니다</a></span>
+=======
+					<input type="text" name="memberId" id="memberId"
+						class="form-control" placeholder="사용자ID"> <label
+						for="username">사용자ID</label> <span
+						class="d-flex justify-content-end"><a
+						th:href="@{/member/findid}"
+						; class="d-inline-flex justify-content-end"
+						style="font-size: 11px; text-decoration: none; color: gray;">아이디가
+							기억나지 않습니다</a></span>
+>>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 				</div>
 
 				<!-- 비밀번호 -->
 				<div class="form-floating mb-4">
 					<input type="password" name="memberPass" id="memberPass"
 						class="form-control password" placeholder="비밀번호"> <label
+<<<<<<< HEAD
 						for="memberPass" id="passlabel">비밀번호</label> <span
 						class="d-flex justify-content-end"><a
 						th:href="@{/member/findpw}"
 						class="d-inline-flex justify-content-end"
 						style="font-size: 11px; text-decoration: none; color: gray;">비밀번호가 기억나지 않습니다</a></span>
+=======
+						for="password" id="passlabel">비밀번호</label> <span
+						class="d-flex justify-content-end"><a
+						th:href="@{/member/findpw}"
+						; class="d-inline-flex justify-content-end"
+						style="font-size: 11px; text-decoration: none; color: gray;">비밀번호가
+							기억나지 않습니다</a></span>
+>>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 
 					<!-- 아이디/비밀번호 미일치 -->
 					<div th:if="${param.error}" class="d-flex justify-content-center">
@@ -170,7 +190,10 @@ body {
 
 				</div>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 				<!-- 로그인 버튼 -->
 				<div class="row"
 					style="display: flex; justify-content: space-around;">
@@ -182,7 +205,10 @@ body {
 			</form>
 		</div>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 		<!-- 회원가입 -->
 		<div>
 			<div class="card shadow p-5 rounded-start-0"
@@ -222,11 +248,17 @@ body {
 						<span class="gsi-material-button-contents">Sign in with
 							Google</span> <span style="display: none;">Sign in with Google</span>
 					</div>
+<<<<<<< HEAD
 				</button></a>
 				</div>
 			</div>
 		</div>
 
 
+=======
+				</div>
+			</div>
+		</div>
+>>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 	</div>
 </div>

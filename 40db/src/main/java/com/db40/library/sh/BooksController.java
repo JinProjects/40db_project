@@ -15,6 +15,7 @@ public class BooksController {
 
     private final BooksService booksService;
 
+<<<<<<< HEAD
 //    @GetMapping("/books/search")
 //    public String index(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
 //        Page<Books> paging = this.booksService.getList(page);
@@ -46,6 +47,27 @@ public class BooksController {
 		model.addAttribute("keyword", keyword);
 		return "books/book_search";
 		
+=======
+    @GetMapping("/")
+    public String index(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
+        Page<Books> paging = this.booksService.getList(page);
+        model.addAttribute("paging", paging);
+        return "book_search";
+    }
+
+    @GetMapping("/list")
+    public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
+        Page<Books> paging = this.booksService.getList(page);
+        model.addAttribute("paging", paging);
+        return "book_search";
+    }
+    
+	@GetMapping(value = "/detail/{bookNo}")
+	public String detail (Model model, @PathVariable("bookNo") Integer bookNo) {
+		Books books = this.booksService.getBooks(bookNo);
+		model.addAttribute("books" , books);
+		return "book_detail";
+>>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 	}
 
 }

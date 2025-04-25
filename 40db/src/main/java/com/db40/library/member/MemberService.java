@@ -115,6 +115,7 @@ public class MemberService {
 		return memberRepository.findByMemberId(memberId).map(Member::getDisplayName).orElse("");
 	}
 	
+<<<<<<< HEAD
 	// Email 가져오기 
 	public String selectEmailByMemberId(String memberId) {
 		return memberRepository.findByMemberId(memberId).map(Member::getEmail).orElse("");
@@ -132,4 +133,7 @@ public class MemberService {
 	public String selectAddressDetailByMemberId(String memberId) {
 		return memberRepository.findByMemberId(memberId).map(Member::getAddressDetail).orElse("");
 	}
+=======
+	
+>>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 }

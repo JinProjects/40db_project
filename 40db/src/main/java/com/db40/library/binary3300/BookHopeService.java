@@ -1,21 +1,34 @@
 package com.db40.library.binary3300;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+>>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+=======
+import org.springframework.stereotype.Service;
+
+import com.db40.library.member.Member;
+
+
+
+>>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 @Service
 public class BookHopeService {
 	@Autowired BookHopeRepository bookHopeRepository;
 	
+<<<<<<< HEAD
 	//PAGING
 	//PAGING
 	//1: 최신글 10		order by bno desc limit 0,10	0번째부터 10개
@@ -30,6 +43,10 @@ public class BookHopeService {
 	
 	//전체리스트
 	public List<BookHope> findAllByOrderByDesc() {
+=======
+	//전체리스트
+	public List<BookHope> findAll() {
+>>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
 		return bookHopeRepository.findAllByOrderByDesc();
 	}
 	
@@ -42,6 +59,7 @@ public class BookHopeService {
 	}
 	
 	//임시 작성하기 
+<<<<<<< HEAD
 //	public void insert(BookHope bookhope, String member_id) {
 //		Member member = new Member();
 //		member.setMemberId(member_id);
@@ -68,3 +86,18 @@ public class BookHopeService {
 	
 	
 }
+=======
+	public void insert(BookHope bookhope, String member_id) {
+		Member member = new Member();
+		member.setMemberId(member_id);
+		bookhope.setMember(member);
+		bookHopeRepository.save(bookhope);
+	}
+	
+	//관리자가 반려하기-등록하기 폼
+	
+	//관리자가 반려하기-등록하기 기능
+	
+	
+}
+>>>>>>> 5faebe21f54764c0654eedef47e912cfd2114430
