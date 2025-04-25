@@ -95,29 +95,6 @@
 		<dependency>
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
 			<artifactId>thymeleaf-layout-dialect</artifactId>
-<<<<<<< HEAD
-			</dependency>
-			<!-- json parsing -->
-			<dependency>
-			  <groupId>org.jsoup</groupId>
-			  <artifactId>jsoup</artifactId>
-			  <version>1.17.2</version>
-			</dependency>
-			<!-- json parsing -->
-			<dependency>
-			    <groupId>com.googlecode.json-simple</groupId>
-			    <artifactId>json-simple</artifactId>
-			    <version>1.1.1</version>
-			</dependency>
-			<!-- openai -->
-			<dependency>
-		      <groupId>com.openai</groupId>
-		      <artifactId>openai-java</artifactId>
-		      <version>0.31.0</version>
-	  		</dependency>
-	      <!-- 추가  -->
-	      <!-- 추가  -->   
-=======
 		</dependency>
 		<!-- 추가 -->
 		<!-- 추가 -->
@@ -144,7 +121,6 @@
 		</dependency>
 
 
->>>>>>> ef0bfea5b5bfc1a53a2a5275d2ea888c105d56dc
 	</dependencies>
 
 	<build>

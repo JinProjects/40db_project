@@ -24,9 +24,11 @@ public class SecurityConfig {
 											// admin 만 접근가능
 											//.requestMatchers(  new AntPathRequestMatcher("/admin/**"))
 											//.hasRole("ROLE_ADMIN") 	  // ADMIN 역할
+			
 											// member 만 접근가능
-											//.requestMatchers(  new AntPathRequestMatcher("/member/**"))
-											//.hasRole("ROLE_MEMBER") 	  // MEMBER 역할
+											.requestMatchers(  new AntPathRequestMatcher("/member/mypage/*"))
+											.hasRole("MEMBER") 	  // MEMBER 역할
+											
 											// 기타페이지 모두 접근가능( 로그인 필요 없음)
 											.requestMatchers(  new AntPathRequestMatcher("/**"))
 											.permitAll() // 모든사용자 접근가능		  
@@ -35,7 +37,7 @@ public class SecurityConfig {
 								.loginPage("/member/login")
 								.usernameParameter("memberId")
 								.passwordParameter("memberPass")
-								.defaultSuccessUrl("/member/member")
+								.defaultSuccessUrl("/member/mypage/main")
 		).logout( // 1-3. logout
 			(logout)-> 	 logout
 							.logoutRequestMatcher( new AntPathRequestMatcher("/member/logout"))

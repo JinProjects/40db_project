@@ -14,8 +14,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberService {
 	
-	
-	
 	private final MemberRepository   memberRepository;
 	private final PasswordEncoder    passwordEncoder;  // SecurityConfig
 	private final MemberStatusRepository memberStatusRepository;
@@ -29,6 +27,7 @@ public class MemberService {
 		} catch (UnknownHostException e) { e.printStackTrace();}
 		return memberRepository.save(member);
 	}
+	
 	// 실명과 휴대폰 번호로 id찾기
 	public Long forFindId(String name, String mobile) {
 		Long findid = memberRepository.findIdByRealNameAndMobile(name, mobile);
@@ -71,5 +70,23 @@ public class MemberService {
 		Member find = memberRepository.findById(id).get();
 		memberRepository.delete(find);
 	}
+	
+	
+	// 중복체크
+	// 아이디
+	public Member selectUserMemberId(String memberId) {
+		return memberRepository.findByMemberId(memberId).get();
+	}
+	
+	// 이메일
+	public Member selectUserEmail(String email) {
+		return memberRepository.findByEmail(email).get();
+	}
+	
+	// displayName 가져오기 
+	public String selectdisplayNameByMemberId(String memberId) {
+		return memberRepository.findByMemberId(memberId).map(Member::getDisplayName).orElse("");
+	}
+	
 	
 }

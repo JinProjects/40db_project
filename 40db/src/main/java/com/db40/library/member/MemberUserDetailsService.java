@@ -20,6 +20,8 @@ public class MemberUserDetailsService implements UserDetailsService{
 	private final MemberRepository   memberRepository;
 	
 	@Override public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
+		
+		
 		Optional<Member> find = memberRepository.findByMemberId(memberId);
 		if(find.isEmpty()) {  throw new UsernameNotFoundException("사용자를 확인해주세요."); }
 		
@@ -35,10 +37,3 @@ public class MemberUserDetailsService implements UserDetailsService{
 	}
 
 } 
-
-
-
-
-
-
-
