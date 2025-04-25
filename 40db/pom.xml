@@ -107,6 +107,12 @@
 			    <artifactId>json-simple</artifactId>
 			    <version>1.1.1</version>
 			</dependency>
+			<!-- openai -->
+			<dependency>
+		      <groupId>com.openai</groupId>
+		      <artifactId>openai-java</artifactId>
+		      <version>0.31.0</version>
+	  		</dependency>
 	      <!-- 추가  -->
 	      <!-- 추가  -->   
 	</dependencies>
