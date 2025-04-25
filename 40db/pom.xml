@@ -95,8 +95,7 @@
 		<dependency>
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
 			<artifactId>thymeleaf-layout-dialect</artifactId>
-<<<<<<< HEAD
-			</dependency>
+		</dependency>
 			<!-- json parsing -->
 			<dependency>
 			  <groupId>org.jsoup</groupId>
@@ -117,8 +116,6 @@
 	  		</dependency>
 	      <!-- 추가  -->
 	      <!-- 추가  -->   
-=======
-		</dependency>
 		<!-- 추가 -->
 		<!-- 추가 -->
 		<dependency>
@@ -143,8 +140,6 @@
 			<version>1.32.1</version>
 		</dependency>
 
-
->>>>>>> ef0bfea5b5bfc1a53a2a5275d2ea888c105d56dc
 	</dependencies>
 
 	<build>

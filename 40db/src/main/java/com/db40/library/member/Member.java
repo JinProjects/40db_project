@@ -44,10 +44,6 @@ public class Member {
 	@Column(name="member_join_ip", nullable=false)private String joinIp;
 	
 	// 계정 상태
-<<<<<<< HEAD
-	@ManyToOne @JoinColumn(name="member_status", nullable=false) MemberStatus memberStatus;
-=======
 	@ManyToOne @JoinColumn(name="member_status", nullable=false) private MemberStatus memberStatus;
->>>>>>> ef0bfea5b5bfc1a53a2a5275d2ea888c105d56dc
 	
 }
