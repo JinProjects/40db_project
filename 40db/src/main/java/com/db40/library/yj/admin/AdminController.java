@@ -36,8 +36,15 @@ public class AdminController {
 	AdminBooksRepository booksRepository;
 	@Autowired
 	CategoryRepository categoryRepository;
-	@Autowired
-	//ChatGPTService chatGPTService;
+//	@Autowired
+//	ChatGPTService chatGPTService;
+	
+	@GetMapping("/admin/main")
+	public String test(Model model) {
+		//model.addAttribute("list", bookApi.findBooks("java"));
+
+		return "admin/main";
+	}
 	
 	@GetMapping("/admin/membersManage")
 	public String membersManage(Model model) {

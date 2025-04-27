@@ -1,5 +1,6 @@
 package com.db40.library.member;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,11 +15,15 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration      // 스프링부트 환경설정팡리
 @EnableWebSecurity  // url 스프링시큐리티 제어 - SecurityFilterChain
 public class SecurityConfig {
+	
+	@Autowired
+	MemberRepository memberRepository;
+	
     //1. url
 	@Bean SecurityFilterChain  filterChain(HttpSecurity http) throws Exception{
 		// 1-0. http.authorizeHttpRequests().formLogin().logout();
 		// 1-1. 로그인을 안하더라도 모든페이지 접근가능   /admin/**   , /user/**,,,	
-		http.authorizeHttpRequests(
+		http.csrf().disable().authorizeHttpRequests(
 			(authorizeHttpRequests) -> 	authorizeHttpRequests
 											// admin 만 접근가능
 											//.requestMatchers(  new AntPathRequestMatcher("/admin/**"))
@@ -26,8 +31,9 @@ public class SecurityConfig {
 			
 											// member 만 접근가능
 											.requestMatchers(  new AntPathRequestMatcher("/member/mypage/*"))
-											.hasRole("MEMBER") 	  // MEMBER 역할
-											
+											.hasRole("ROLE_MEMBER") 	  // MEMBER 역할
+											.requestMatchers(new AntPathRequestMatcher("/admin/**"))
+											.hasRole("ROLE_ADMIN")
 											// 기타페이지 모두 접근가능( 로그인 필요 없음)
 											.requestMatchers(  new AntPathRequestMatcher("/**"))
 											.permitAll() // 모든사용자 접근가능		  

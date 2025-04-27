@@ -61,7 +61,7 @@
 			});
 			function ajax_api(search){
 				$.ajax({
-					url:"/hopeBook/hope_usersearch/" + search,
+					url:"/40db/hopeBook/hope_usersearch/" + encodeURIComponent(search),
 					type:"GET",
 					datatype:"json",
 					contentType:"application/json;charset=UTF-8",

@@ -54,7 +54,7 @@ public class Books {
 	    @Column(name = "book_pulished_date", length = 100)
 	    private String bookPublishedDate;
 	    
-	    @Column(name = "book_description", length = 100)
+	    @Column(name = "book_description",columnDefinition = "text")
 	    private String bookDescription;
 	    
        @Column(name = "book_entered_date", length = 100)

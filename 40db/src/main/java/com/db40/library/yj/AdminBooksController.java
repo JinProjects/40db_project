@@ -18,11 +18,11 @@ public class AdminBooksController {
 	@Autowired
 	public AdminBooksRepository bookRepository;
 	
-	@GetMapping("/admin/main")
+	@GetMapping("/main")
 	public String test(Model model) {
 		//model.addAttribute("list", bookApi.findBooks("java"));
 
-		return "adminMain";
+		return "main";
 	}
 	@GetMapping("/books/bookDelete/{bookNo}")
 	public String bookDelete(@PathVariable("bookNo") String bookNo) {
